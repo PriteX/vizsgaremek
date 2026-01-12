@@ -1,6 +1,8 @@
 # vizsgaremek
 
-otletek: -megadod az otthoni korulmenyeidet es hogy korulbelul kisallatra havonta mennyit tudsz szanni es a weboldal kihozza hogy szamodra melyik a megfelelo kisallat es a fajtaja
+otletek:
+
+         -megadod az otthoni korulmenyeidet es hogy korulbelul kisallatra havonta mennyit tudsz szanni es a weboldal kihozza hogy szamodra melyik a megfelelo kisallat es a fajtaja
          
          
          -valami kartyajatek statisztikai adatokkal
