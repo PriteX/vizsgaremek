@@ -1,10 +1,14 @@
 async function apiFetch(path, options = {}) {
-  const baseUrl = window.APP_CONFIG.baseUrl;
+  const baseUrl = window.APP_CONFIG.baseUrl.replace(/\/$/, "");
+
   const token = localStorage.getItem("token");
 
   const headers = Object.assign({}, options.headers || {});
   if (!headers["Content-Type"] && options.body) headers["Content-Type"] = "application/json";
-  if (token) headers["Authorization"] = "Bearer " + token;
+ if (token) {
+  headers["Authorization"] = `Bearer ${token}`;
+}
+
 
   const res = await fetch(baseUrl + path, { ...options, headers });
 

@@ -1,4 +1,4 @@
 
 window.APP_CONFIG = {
-  baseUrl: "http://localhost:54949"
+  baseUrl: "https://localhost:54949"
 };
