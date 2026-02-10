@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Idopontfoglalo.Api.props" />
+</Project>

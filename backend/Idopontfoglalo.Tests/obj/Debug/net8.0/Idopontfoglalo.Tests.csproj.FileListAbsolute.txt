@@ -1,0 +1,5 @@
+C:\Users\peter\Documents\ISKOLA\vizsgaremek\vizsgaremek_idopontfoglalo\backend\Idopontfoglalo.Tests\obj\Debug\net8.0\Idopontfoglalo.Tests.csproj.AssemblyReference.cache
+C:\Users\peter\Documents\ISKOLA\vizsgaremek\vizsgaremek_idopontfoglalo\backend\Idopontfoglalo.Tests\obj\Debug\net8.0\Idopontfoglalo.Tests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\peter\Documents\ISKOLA\vizsgaremek\vizsgaremek_idopontfoglalo\backend\Idopontfoglalo.Tests\obj\Debug\net8.0\Idopontfoglalo.Tests.AssemblyInfoInputs.cache
+C:\Users\peter\Documents\ISKOLA\vizsgaremek\vizsgaremek_idopontfoglalo\backend\Idopontfoglalo.Tests\obj\Debug\net8.0\Idopontfoglalo.Tests.AssemblyInfo.cs
+C:\Users\peter\Documents\ISKOLA\vizsgaremek\vizsgaremek_idopontfoglalo\backend\Idopontfoglalo.Tests\obj\Debug\net8.0\Idopontfoglalo.Tests.csproj.CoreCompileInputs.cache
