@@ -21,7 +21,6 @@ async function loadLookups() {
     .map(e => `<option value="${e.id}">${e.name}</option>`)
     .join("");
 
-  // default date: tomorrow
   const tomorrow = new Date(Date.now() + 24*60*60*1000);
   el("dateInput").value = tomorrow.toISOString().slice(0,10);
 }
