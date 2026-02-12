@@ -4,12 +4,6 @@ C:\Users\peter\Downloads\vizsgaremek_idopontfoglalo\backend\Idopontfoglalo.Api\o
 C:\Users\peter\Downloads\vizsgaremek_idopontfoglalo\backend\Idopontfoglalo.Api\obj\Debug\net8.0\Idopontfoglalo.Api.AssemblyInfo.cs
 C:\Users\peter\Downloads\vizsgaremek_idopontfoglalo\backend\Idopontfoglalo.Api\obj\Debug\net8.0\Idopontfoglalo.Api.csproj.CoreCompileInputs.cache
 C:\Users\peter\Downloads\vizsgaremek_idopontfoglalo\backend\Idopontfoglalo.Api\obj\Debug\net8.0\Idopontfoglalo.Api.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\peter\Documents\ISKOLA\vizsgaremek\vizsgaremek_idopontfoglalo\backend\Idopontfoglalo.Api\obj\Debug\net8.0\Idopontfoglalo.Api.csproj.AssemblyReference.cache
-C:\Users\peter\Documents\ISKOLA\vizsgaremek\vizsgaremek_idopontfoglalo\backend\Idopontfoglalo.Api\obj\Debug\net8.0\Idopontfoglalo.Api.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\peter\Documents\ISKOLA\vizsgaremek\vizsgaremek_idopontfoglalo\backend\Idopontfoglalo.Api\obj\Debug\net8.0\Idopontfoglalo.Api.AssemblyInfoInputs.cache
-C:\Users\peter\Documents\ISKOLA\vizsgaremek\vizsgaremek_idopontfoglalo\backend\Idopontfoglalo.Api\obj\Debug\net8.0\Idopontfoglalo.Api.AssemblyInfo.cs
-C:\Users\peter\Documents\ISKOLA\vizsgaremek\vizsgaremek_idopontfoglalo\backend\Idopontfoglalo.Api\obj\Debug\net8.0\Idopontfoglalo.Api.csproj.CoreCompileInputs.cache
-C:\Users\peter\Documents\ISKOLA\vizsgaremek\vizsgaremek_idopontfoglalo\backend\Idopontfoglalo.Api\obj\Debug\net8.0\Idopontfoglalo.Api.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\peter\Documents\ISKOLA\vizsgaremek\vizsgaremek_idopontfoglalo\backend\Idopontfoglalo.Api\bin\Debug\net8.0\appsettings.json
 C:\Users\peter\Documents\ISKOLA\vizsgaremek\vizsgaremek_idopontfoglalo\backend\Idopontfoglalo.Api\bin\Debug\net8.0\Idopontfoglalo.Api.staticwebassets.endpoints.json
 C:\Users\peter\Documents\ISKOLA\vizsgaremek\vizsgaremek_idopontfoglalo\backend\Idopontfoglalo.Api\bin\Debug\net8.0\Idopontfoglalo.Api.exe
@@ -39,6 +33,14 @@ C:\Users\peter\Documents\ISKOLA\vizsgaremek\vizsgaremek_idopontfoglalo\backend\I
 C:\Users\peter\Documents\ISKOLA\vizsgaremek\vizsgaremek_idopontfoglalo\backend\Idopontfoglalo.Api\bin\Debug\net8.0\Idopontfoglalo.Infrastructure.dll
 C:\Users\peter\Documents\ISKOLA\vizsgaremek\vizsgaremek_idopontfoglalo\backend\Idopontfoglalo.Api\bin\Debug\net8.0\Idopontfoglalo.Core.pdb
 C:\Users\peter\Documents\ISKOLA\vizsgaremek\vizsgaremek_idopontfoglalo\backend\Idopontfoglalo.Api\bin\Debug\net8.0\Idopontfoglalo.Infrastructure.pdb
+C:\Users\peter\Documents\ISKOLA\vizsgaremek\vizsgaremek_idopontfoglalo\backend\Idopontfoglalo.Api\obj\Debug\net8.0\Idopontfoglalo.Api.csproj.AssemblyReference.cache
+C:\Users\peter\Documents\ISKOLA\vizsgaremek\vizsgaremek_idopontfoglalo\backend\Idopontfoglalo.Api\obj\Debug\net8.0\Idopontfoglalo.Api.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\peter\Documents\ISKOLA\vizsgaremek\vizsgaremek_idopontfoglalo\backend\Idopontfoglalo.Api\obj\Debug\net8.0\Idopontfoglalo.Api.AssemblyInfoInputs.cache
+C:\Users\peter\Documents\ISKOLA\vizsgaremek\vizsgaremek_idopontfoglalo\backend\Idopontfoglalo.Api\obj\Debug\net8.0\Idopontfoglalo.Api.AssemblyInfo.cs
+C:\Users\peter\Documents\ISKOLA\vizsgaremek\vizsgaremek_idopontfoglalo\backend\Idopontfoglalo.Api\obj\Debug\net8.0\Idopontfoglalo.Api.csproj.CoreCompileInputs.cache
+C:\Users\peter\Documents\ISKOLA\vizsgaremek\vizsgaremek_idopontfoglalo\backend\Idopontfoglalo.Api\obj\Debug\net8.0\Idopontfoglalo.Api.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\peter\Documents\ISKOLA\vizsgaremek\vizsgaremek_idopontfoglalo\backend\Idopontfoglalo.Api\obj\Debug\net8.0\Idopontfoglalo.Api.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\peter\Documents\ISKOLA\vizsgaremek\vizsgaremek_idopontfoglalo\backend\Idopontfoglalo.Api\obj\Debug\net8.0\Idopontfoglalo.Api.sourcelink.json
 C:\Users\peter\Documents\ISKOLA\vizsgaremek\vizsgaremek_idopontfoglalo\backend\Idopontfoglalo.Api\obj\Debug\net8.0\scopedcss\bundle\Idopontfoglalo.Api.styles.css
 C:\Users\peter\Documents\ISKOLA\vizsgaremek\vizsgaremek_idopontfoglalo\backend\Idopontfoglalo.Api\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\peter\Documents\ISKOLA\vizsgaremek\vizsgaremek_idopontfoglalo\backend\Idopontfoglalo.Api\obj\Debug\net8.0\staticwebassets.development.json

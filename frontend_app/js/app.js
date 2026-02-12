@@ -3,6 +3,19 @@ const el = (id) => document.getElementById(id);
 function setStatus(id, msg) {
   el(id).textContent = msg || "";
 }
+function getToken() {
+  return localStorage.getItem("token"); 
+}
+function logout() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("role");
+
+  setStatus("authStatus", "Kijelentkezve.");
+  el("myAppointments").innerHTML = "<p class='muted'>A foglalásokhoz jelentkezz be.</p>";
+  el("slots").innerHTML = "";
+  setStatus("bookingStatus", "");
+}
+
 
 async function loadLookups() {
   const baseUrl = window.APP_CONFIG.baseUrl;
@@ -29,6 +42,10 @@ async function onLogin(e) {
   e.preventDefault();
   setStatus("authStatus", "");
 
+  el("myAppointments").innerHTML = "";
+  el("slots").innerHTML = "";
+  setStatus("bookingStatus", "");
+
   try {
     const email = el("loginEmail").value;
     const password = el("loginPassword").value;
@@ -41,7 +58,12 @@ async function onLogin(e) {
     localStorage.setItem("token", res.token);
     localStorage.setItem("role", res.role);
     setStatus("authStatus", "Sikeres belépés: " + res.email + " (" + res.role + ")");
+    el("myAppointments").innerHTML = "";
+await loadMyAppointments();
   } catch (err) {
+    localStorage.removeItem("token");
+localStorage.removeItem("role");
+
     setStatus("authStatus", "Hiba: " + err.message);
   }
 }
@@ -64,7 +86,12 @@ async function onRegister(e) {
     localStorage.setItem("token", res.token);
     localStorage.setItem("role", res.role);
     setStatus("authStatus", "Sikeres regisztráció és belépés: " + res.email);
+    el("myAppointments").innerHTML = "";
+await loadMyAppointments();
   } catch (err) {
+    localStorage.removeItem("token");
+localStorage.removeItem("role");
+
     setStatus("authStatus", "Hiba: " + err.message);
   }
 }
@@ -117,16 +144,29 @@ async function bookSlot(employeeId, serviceId, startAt) {
 
 async function loadMyAppointments() {
   const container = el("myAppointments");
+  const token = getToken();
+
+  if (!token) {
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    container.innerHTML = "<p class='muted'>A foglalásokhoz jelentkezz be.</p>";
+    return;
+  }
+
   container.innerHTML = "";
+
   try {
     const items = await apiFetch("/api/appointments/me");
 
-    if (!items.length) {
+    // csak a foglaltakat mutatjuk (Booked = 1)
+    const visible = items.filter(a => a.status === 1);
+
+    if (!visible.length) {
       container.innerHTML = "<p class='muted'>Még nincs foglalásod.</p>";
       return;
     }
 
-    for (const a of items) {
+    for (const a of visible) {
       const row = document.createElement("div");
       row.className = "app-item";
 
@@ -136,10 +176,17 @@ async function loadMyAppointments() {
 
       const btn = document.createElement("button");
       btn.textContent = "Lemondás";
+
       btn.addEventListener("click", async () => {
-        await apiFetch("/api/appointments/" + a.id, { method: "DELETE" });
-        await loadMyAppointments();
-        await loadSlots();
+        try {
+          console.log("DELETE id =", a.id, a);
+          await apiFetch("/api/appointments/" + a.id, { method: "DELETE" });
+          await loadMyAppointments();
+          await loadSlots();
+        } catch (err) {
+          console.error("DELETE failed:", err);
+          alert("Lemondás hiba: " + err.message);
+        }
       });
 
       row.appendChild(left);
@@ -147,15 +194,38 @@ async function loadMyAppointments() {
       container.appendChild(row);
     }
   } catch (err) {
-    container.innerHTML = "<p class='muted'>A foglalások megtekintéséhez jelentkezz be.</p>";
+    console.error("loadMyAppointments error:", err);
+    container.innerHTML = `<p class='muted'>Hiba a foglalások lekérésekor: ${err.message}</p>`;
   }
 }
 
+
 document.addEventListener("DOMContentLoaded", async () => {
+  // gombok / formok
   el("loginForm").addEventListener("submit", onLogin);
   el("registerForm").addEventListener("submit", onRegister);
+  el("logoutBtn").addEventListener("click", logout);
   el("loadSlotsBtn").addEventListener("click", loadSlots);
-  el("loadMyAppointmentsBtn").addEventListener("click", loadMyAppointments);
 
-  await loadLookups();
+  el("loadMyAppointmentsBtn").addEventListener("click", () => {
+    if (!getToken()) {
+      el("myAppointments").innerHTML = "<p class='muted'>A foglalásokhoz jelentkezz be.</p>";
+      return;
+    }
+    loadMyAppointments();
+  });
+
+  // induló üzenet + automatikus betöltés
+  const token = getToken();
+
+  if (token) {
+    setStatus("authStatus", "Bejelentkezve (mentett munkamenet).");
+    await loadMyAppointments(); // F5 után is töltse be
+  } else {
+    setStatus("authStatus", "Nem vagy bejelentkezve.");
+    el("myAppointments").innerHTML = "<p class='muted'>A foglalásokhoz jelentkezz be.</p>";
+  }
+
+  await loadLookups(); // service/employee lista
 });
+

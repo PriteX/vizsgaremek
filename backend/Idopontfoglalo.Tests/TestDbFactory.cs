@@ -29,8 +29,8 @@ public static class TestDbFactory
         db.Employees.Add(new Employee { Id = 1, Name = "Kiss Anna", IsActive = true });
 
         db.EmployeeServices.AddRange(
-            new EmployeeService { EmployeeId = 1, ServiceId = 1 },
-            new EmployeeService { EmployeeId = 1, ServiceId = 2 }
+            new EmployeeServiceService { EmployeeId = 1, ServiceId = 1 },
+            new EmployeeServiceService { EmployeeId = 1, ServiceId = 2 }
         );
 
         

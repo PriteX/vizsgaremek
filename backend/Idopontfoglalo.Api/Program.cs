@@ -17,9 +17,13 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.AllowAnyOrigin()
-              .AllowAnyHeader()
-              .AllowAnyMethod();
+        policy
+            .WithOrigins(
+                "http://127.0.0.1:5500",
+                "http://localhost:5500"
+            )
+            .AllowAnyHeader()
+            .AllowAnyMethod();
     });
 });
 
@@ -67,17 +71,20 @@ app.UseMiddleware<ExceptionHandlingMiddleware>();
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
-
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseCors("AllowFrontend");
-app.UseHttpsRedirection();
+app.UseRouting();
+
+app.UseCors("AllowFrontend");    
 
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseHttpsRedirection();
+
 app.MapControllers();
 
 app.Run();
+

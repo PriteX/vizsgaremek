@@ -22,7 +22,10 @@ public class AppointmentsController : ControllerBase
     [Authorize]
     public async Task<ActionResult<AppointmentDto>> Create([FromBody] AppointmentCreateRequest req)
     {
-        var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+        var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (string.IsNullOrEmpty(userIdStr)) return Unauthorized();
+
+        var userId = int.Parse(userIdStr);
         var created = await _appointments.CreateAsync(userId, new AppointmentCreateModel(req.EmployeeId, req.ServiceId, req.StartAt));
         return Ok(created);
     }
@@ -31,7 +34,10 @@ public class AppointmentsController : ControllerBase
     [Authorize]
     public async Task<ActionResult<List<AppointmentDto>>> MyAppointments()
     {
-        var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+        var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (string.IsNullOrEmpty(userIdStr)) return Unauthorized();
+
+        var userId = int.Parse(userIdStr);
         return Ok(await _appointments.GetMyAppointmentsAsync(userId));
     }
 
@@ -39,7 +45,10 @@ public class AppointmentsController : ControllerBase
     [Authorize]
     public async Task<IActionResult> Cancel([FromRoute] int id)
     {
-        var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+        var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (string.IsNullOrEmpty(userIdStr)) return Unauthorized();
+
+        var userId = int.Parse(userIdStr);
         await _appointments.CancelAsync(userId, id);
         return NoContent();
     }

@@ -1,5 +1,6 @@
 using Idopontfoglalo.Core.Entities;
 using Microsoft.EntityFrameworkCore;
+using EmployeeServiceEntity = Idopontfoglalo.Core.Entities.EmployeeServiceService;
 
 namespace Idopontfoglalo.Infrastructure.Data;
 
@@ -11,7 +12,7 @@ public class AppDbContext : DbContext
     public DbSet<User> Users => Set<User>();
     public DbSet<Service> Services => Set<Service>();
     public DbSet<Employee> Employees => Set<Employee>();
-    public DbSet<EmployeeService> EmployeeServices => Set<EmployeeService>();
+    public DbSet<EmployeeServiceService> EmployeeServices => Set<EmployeeServiceService>();
     public DbSet<Availability> Availability => Set<Availability>();
     public DbSet<Appointment> Appointments => Set<Appointment>();
 
@@ -25,18 +26,19 @@ public class AppDbContext : DbContext
             .HasIndex(u => u.Email)
             .IsUnique();
 
-        modelBuilder.Entity<EmployeeService>()
-            .HasKey(es => new { es.EmployeeId, es.ServiceId });
+        modelBuilder.Entity<Idopontfoglalo.Core.Entities.EmployeeServiceService>()
+     .HasKey(es => new { es.EmployeeId, es.ServiceId });
 
-        modelBuilder.Entity<EmployeeService>()
+        modelBuilder.Entity<Idopontfoglalo.Core.Entities.EmployeeServiceService>()
             .HasOne(es => es.Employee)
             .WithMany(e => e.EmployeeServices)
             .HasForeignKey(es => es.EmployeeId);
 
-        modelBuilder.Entity<EmployeeService>()
+        modelBuilder.Entity<Idopontfoglalo.Core.Entities.EmployeeServiceService>()
             .HasOne(es => es.Service)
             .WithMany(s => s.EmployeeServices)
             .HasForeignKey(es => es.ServiceId);
+
 
         modelBuilder.Entity<Availability>()
             .Property(a => a.StartTime)
