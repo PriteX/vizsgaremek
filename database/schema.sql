@@ -1,10 +1,9 @@
--- MySQL schema for Időpontfoglaló rendszer
--- Charset: utf8mb4
+
 
 SET NAMES utf8mb4;
 SET time_zone = '+00:00';
 
--- Drop tables in reverse dependency order
+
 DROP TABLE IF EXISTS appointments;
 DROP TABLE IF EXISTS availability;
 DROP TABLE IF EXISTS employee_services;
@@ -57,7 +56,7 @@ CREATE TABLE employee_services (
 CREATE TABLE availability (
   id INT AUTO_INCREMENT PRIMARY KEY,
   employee_id INT NOT NULL,
-  day_of_week TINYINT NOT NULL, -- 0=Sunday ... 6=Saturday
+  day_of_week TINYINT NOT NULL, 
   start_time TIME NOT NULL,
   end_time TIME NOT NULL,
   valid_from DATE NULL,
@@ -74,7 +73,7 @@ CREATE TABLE appointments (
   service_id INT NOT NULL,
   start_at DATETIME NOT NULL,
   end_at DATETIME NOT NULL,
-  status TINYINT NOT NULL DEFAULT 1, -- 1=BOOKED, 2=CANCELLED
+  status TINYINT NOT NULL DEFAULT 1, 
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT fk_app_user FOREIGN KEY (user_id) REFERENCES users(id),
   CONSTRAINT fk_app_employee FOREIGN KEY (employee_id) REFERENCES employees(id),
