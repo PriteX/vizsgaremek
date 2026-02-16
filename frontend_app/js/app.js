@@ -112,6 +112,57 @@ function findEmployeeName(employeeId) {
   return state.employees.find((e) => e.id === Number(employeeId))?.name || `Dolgozó #${employeeId}`;
 }
 
+function getSelectedEmployeeServiceIds() {
+  return Array.from(document.querySelectorAll("input[name='employeeService']:checked"))
+    .map((input) => Number(input.value))
+    .filter((id) => id > 0);
+}
+
+function renderEmployeeServicesSelector(selectedIds = []) {
+  const container = el("employeeServices");
+  if (!container) {
+    return;
+  }
+
+  const selected = new Set((selectedIds || []).map((id) => Number(id)));
+  const activeServices = state.services.filter((service) => service.isActive);
+
+  if (!activeServices.length) {
+    container.innerHTML = "<p class='muted'>Nincs aktív szolgáltatás.</p>";
+    return;
+  }
+
+  container.innerHTML = activeServices
+    .map(
+      (service) => `<label><input type="checkbox" name="employeeService" value="${service.id}" ${selected.has(service.id) ? "checked" : ""}/> ${service.name}</label>`
+    )
+    .join("");
+}
+
+function filterEmployeesBySelectedService() {
+  const employeeSelect = el("employeeSelect");
+  const serviceSelect = el("serviceSelect");
+
+  if (!employeeSelect || !serviceSelect) {
+    return;
+  }
+
+  const selectedServiceId = Number(serviceSelect.value || 0);
+  const employees = state.employees.filter((e) => e.isActive);
+
+  const eligible = selectedServiceId > 0
+    ? employees.filter((e) => !Array.isArray(e.serviceIds) || e.serviceIds.includes(selectedServiceId))
+    : employees;
+
+  employeeSelect.innerHTML = eligible
+    .map((e) => `<option value="${e.id}">${e.name}</option>`)
+    .join("");
+
+  if (!eligible.length) {
+    employeeSelect.innerHTML = "<option value=''>Nincs megfelelő dolgozó</option>";
+  }
+}
+
 function resetAdminPanel() {
   setStatus("adminStatus", "");
 
@@ -155,10 +206,7 @@ async function loadLookups() {
     .map((s) => `<option value="${s.id}">${s.name} (${s.durationMinutes} perc)</option>`)
     .join("");
 
-  el("employeeSelect").innerHTML = state.employees
-    .filter((e) => e.isActive)
-    .map((e) => `<option value="${e.id}">${e.name}</option>`)
-    .join("");
+  filterEmployeesBySelectedService();
 
   const tomorrow = new Date(Date.now() + 24 * 60 * 60 * 1000);
   const today = new Date();
@@ -365,6 +413,8 @@ function resetEmployeeForm() {
   }
 }
 
+  renderEmployeeServicesSelector([]);
+
 async function loadAdminEmployees() {
   if (!isAdmin()) {
     return;
@@ -378,7 +428,15 @@ async function loadAdminEmployees() {
   container.innerHTML = "";
 
   try {
-    const items = await apiFetch("/api/employees");
+    const baseItems = await apiFetch("/api/employees");
+    const items = await Promise.all(baseItems.map(async (employee) => {
+      try {
+        const serviceIds = await apiFetch(`/api/employees/${employee.id}/services`);
+        return { ...employee, serviceIds };
+      } catch {
+        return { ...employee, serviceIds: [] };
+      }
+    }));
 
     if (!items.length) {
       container.innerHTML = "<p class='muted'>Nincs dolgozó az adatbázisban.</p>";
@@ -390,8 +448,13 @@ async function loadAdminEmployees() {
       row.className = "app-item";
 
       const info = document.createElement("div");
+      const serviceNames = (employee.serviceIds || [])
+        .map((serviceId) => findServiceName(serviceId))
+        .join(", ");
+
       info.innerHTML = `<div>${employee.name}</div>
-        <div class="muted">E-mail: ${employee.email || "-"} · Telefon: ${employee.phone || "-"} · Állapot: ${employee.isActive ? "Aktív" : "Inaktív"}</div>`;
+        <div class="muted">E-mail: ${employee.email || "-"} · Telefon: ${employee.phone || "-"} · Állapot: ${employee.isActive ? "Aktív" : "Inaktív"}</div>
+        <div class="muted">Szolgáltatások: ${serviceNames || "nincs kiválasztva"}</div>`;
 
       const actions = document.createElement("div");
       actions.className = "row";
@@ -399,12 +462,19 @@ async function loadAdminEmployees() {
       const editBtn = document.createElement("button");
       editBtn.type = "button";
       editBtn.textContent = "Szerkesztés";
-      editBtn.addEventListener("click", () => {
+      editBtn.addEventListener("click", async () => {
         el("employeeId").value = employee.id;
         el("employeeName").value = employee.name || "";
         el("employeeEmail").value = employee.email || "";
         el("employeePhone").value = employee.phone || "";
         el("employeeIsActive").checked = !!employee.isActive;
+      
+        try {
+          const serviceIds = await apiFetch(`/api/employees/${employee.id}/services`);
+          renderEmployeeServicesSelector(serviceIds);
+        } catch (err) {
+          setStatus("adminStatus", `Hiba a dolgozó szolgáltatásainak betöltésekor: ${err.message}`);
+        }
       });
 
       const deleteBtn = document.createElement("button");
@@ -450,7 +520,7 @@ async function onEmployeeSubmit(e) {
   const email = el("employeeEmail").value.trim() || null;
   const phone = el("employeePhone").value.trim() || null;
   const isActive = !!el("employeeIsActive").checked;
-
+const serviceIds = getSelectedEmployeeServiceIds();
   if (!name) {
     setStatus("adminStatus", "A név megadása kötelező.");
     return;
@@ -465,10 +535,18 @@ async function onEmployeeSubmit(e) {
         body: JSON.stringify(payload)
       });
       setStatus("adminStatus", "Dolgozó frissítve.");
+         await apiFetch(`/api/employees/${id}/services`, {
+        method: "PUT",
+        body: JSON.stringify({ serviceIds })
+      });
     } else {
-      await apiFetch("/api/employees", {
+      const created = await apiFetch("/api/employees", {
         method: "POST",
         body: JSON.stringify(payload)
+      });
+           await apiFetch(`/api/employees/${created.id}/services`, {
+        method: "PUT",
+        body: JSON.stringify({ serviceIds })
       });
       setStatus("adminStatus", "Dolgozó létrehozva.");
     }
@@ -563,6 +641,21 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (loadAdminAppointmentsBtn) {
     loadAdminAppointmentsBtn.addEventListener("click", loadAdminAppointments);
   }
+    const employeeForm = el("employeeForm");
+  if (employeeForm) {
+    employeeForm.addEventListener("submit", onEmployeeSubmit);
+  }
+
+  const employeeResetBtn = el("employeeResetBtn");
+  if (employeeResetBtn) {
+    employeeResetBtn.addEventListener("click", resetEmployeeForm);
+  }
+
+  const serviceSelect = el("serviceSelect");
+  if (serviceSelect) {
+    serviceSelect.addEventListener("change", filterEmployeesBySelectedService);
+  }
+
 
   const token = getToken();
 
