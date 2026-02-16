@@ -115,6 +115,43 @@
       </div>
 
       <div id="adminAppointments"></div>
+      <hr />
+
+      <h3>Dolgozók kezelése</h3>
+      <form id="employeeForm">
+        <input id="employeeId" type="hidden" />
+
+        <div class="row">
+          <div class="col">
+            <label>Név
+              <input id="employeeName" type="text" required />
+            </label>
+          </div>
+          <div class="col">
+            <label>E-mail
+              <input id="employeeEmail" type="email" placeholder="(opcionális)" />
+            </label>
+          </div>
+          <div class="col">
+            <label>Telefonszám
+              <input id="employeePhone" type="text" placeholder="(opcionális)" />
+            </label>
+          </div>
+        </div>
+
+        <div class="row">
+          <label>
+            <input id="employeeIsActive" type="checkbox" checked /> Aktív
+          </label>
+        </div>
+
+        <div class="row">
+          <button id="employeeSaveBtn" type="submit">Dolgozó mentése</button>
+          <button id="employeeResetBtn" type="button">Űrlap törlése</button>
+        </div>
+      </form>
+
+      <div id="adminEmployees"></div>
       <div class="status" id="adminStatus"></div>
     </div>
   </div>

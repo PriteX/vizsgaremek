@@ -342,6 +342,143 @@ function openAdminModal() {
 
   modal.classList.remove("hidden");
   modal.setAttribute("aria-hidden", "false");
+   resetEmployeeForm();
+  loadAdminEmployees();
+}
+
+
+function resetEmployeeForm() {
+  const employeeForm = el("employeeForm");
+  if (employeeForm) {
+    employeeForm.reset();
+  }
+
+  const employeeId = el("employeeId");
+  const employeeIsActive = el("employeeIsActive");
+
+  if (employeeId) {
+    employeeId.value = "";
+  }
+
+  if (employeeIsActive) {
+    employeeIsActive.checked = true;
+  }
+}
+
+async function loadAdminEmployees() {
+  if (!isAdmin()) {
+    return;
+  }
+
+  const container = el("adminEmployees");
+  if (!container) {
+    return;
+  }
+
+  container.innerHTML = "";
+
+  try {
+    const items = await apiFetch("/api/employees");
+
+    if (!items.length) {
+      container.innerHTML = "<p class='muted'>Nincs dolgozó az adatbázisban.</p>";
+      return;
+    }
+
+    for (const employee of items) {
+      const row = document.createElement("div");
+      row.className = "app-item";
+
+      const info = document.createElement("div");
+      info.innerHTML = `<div>${employee.name}</div>
+        <div class="muted">E-mail: ${employee.email || "-"} · Telefon: ${employee.phone || "-"} · Állapot: ${employee.isActive ? "Aktív" : "Inaktív"}</div>`;
+
+      const actions = document.createElement("div");
+      actions.className = "row";
+
+      const editBtn = document.createElement("button");
+      editBtn.type = "button";
+      editBtn.textContent = "Szerkesztés";
+      editBtn.addEventListener("click", () => {
+        el("employeeId").value = employee.id;
+        el("employeeName").value = employee.name || "";
+        el("employeeEmail").value = employee.email || "";
+        el("employeePhone").value = employee.phone || "";
+        el("employeeIsActive").checked = !!employee.isActive;
+      });
+
+      const deleteBtn = document.createElement("button");
+      deleteBtn.type = "button";
+      deleteBtn.textContent = "Törlés";
+      deleteBtn.addEventListener("click", async () => {
+        if (!confirm(`Biztosan törlöd ezt a dolgozót: ${employee.name}?`)) {
+          return;
+        }
+
+        try {
+          await apiFetch(`/api/employees/${employee.id}`, { method: "DELETE" });
+          setStatus("adminStatus", "Dolgozó törölve.");
+          await loadLookups();
+          await loadAdminEmployees();
+        } catch (err) {
+          setStatus("adminStatus", `Hiba: ${err.message}`);
+        }
+      });
+
+      actions.appendChild(editBtn);
+      actions.appendChild(deleteBtn);
+
+      row.appendChild(info);
+      row.appendChild(actions);
+      container.appendChild(row);
+    }
+  } catch (err) {
+    setStatus("adminStatus", `Hiba: ${err.message}`);
+  }
+}
+
+async function onEmployeeSubmit(e) {
+  e.preventDefault();
+
+  if (!isAdmin()) {
+    setStatus("adminStatus", "Nincs jogosultság.");
+    return;
+  }
+
+  const id = Number(el("employeeId").value || 0);
+  const name = el("employeeName").value.trim();
+  const email = el("employeeEmail").value.trim() || null;
+  const phone = el("employeePhone").value.trim() || null;
+  const isActive = !!el("employeeIsActive").checked;
+
+  if (!name) {
+    setStatus("adminStatus", "A név megadása kötelező.");
+    return;
+  }
+
+  const payload = { name, email, phone, isActive };
+
+  try {
+    if (id > 0) {
+      await apiFetch(`/api/employees/${id}`, {
+        method: "PUT",
+        body: JSON.stringify(payload)
+      });
+      setStatus("adminStatus", "Dolgozó frissítve.");
+    } else {
+      await apiFetch("/api/employees", {
+        method: "POST",
+        body: JSON.stringify(payload)
+      });
+      setStatus("adminStatus", "Dolgozó létrehozva.");
+    }
+
+    resetEmployeeForm();
+    await loadLookups();
+    await loadAdminEmployees();
+  } catch (err) {
+    setStatus("adminStatus", `Hiba: ${err.message}`);
+  }
 }
 
 function closeAdminModal() {
