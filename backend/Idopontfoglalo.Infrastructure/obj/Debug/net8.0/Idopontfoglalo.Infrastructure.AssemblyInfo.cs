@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Idopontfoglalo.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4e6112655a0ccfc46b844f1d9f8edf0fa691f14e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3cc3b719d72cc5f69c262e45549d85e67ed65ecd")]
 [assembly: System.Reflection.AssemblyProductAttribute("Idopontfoglalo.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Idopontfoglalo.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
