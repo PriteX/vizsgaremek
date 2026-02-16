@@ -3,8 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A1111111-1111-1111-1111-111111111111}|Idopontfoglalo.Api\\Idopontfoglalo.Api.csproj|c:\\users\\peter\\documents\\iskola\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\idopontfoglalo.api\\controllers\\adminappointmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A1111111-1111-1111-1111-111111111111}|Idopontfoglalo.Api\\Idopontfoglalo.Api.csproj|solutionrelative:idopontfoglalo.api\\controllers\\adminappointmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A1111111-1111-1111-1111-111111111111}|Idopontfoglalo.Api\\Idopontfoglalo.Api.csproj|c:\\users\\peter\\documents\\iskola\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\idopontfoglalo.api\\controllers\\appointmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A1111111-1111-1111-1111-111111111111}|Idopontfoglalo.Api\\Idopontfoglalo.Api.csproj|solutionrelative:idopontfoglalo.api\\controllers\\appointmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A1111111-1111-1111-1111-111111111111}|Idopontfoglalo.Api\\Idopontfoglalo.Api.csproj|c:\\users\\peter\\documents\\iskola\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\idopontfoglalo.api\\controllers\\employeescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A1111111-1111-1111-1111-111111111111}|Idopontfoglalo.Api\\Idopontfoglalo.Api.csproj|solutionrelative:idopontfoglalo.api\\controllers\\employeescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3333333-3333-3333-3333-333333333333}|Idopontfoglalo.Infrastructure\\Idopontfoglalo.Infrastructure.csproj|c:\\users\\peter\\documents\\iskola\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\idopontfoglalo.infrastructure\\services\\employeeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3333333-3333-3333-3333-333333333333}|Idopontfoglalo.Infrastructure\\Idopontfoglalo.Infrastructure.csproj|solutionrelative:idopontfoglalo.infrastructure\\services\\employeeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2222222-2222-2222-2222-222222222222}|Idopontfoglalo.Core\\Idopontfoglalo.Core.csproj|c:\\users\\peter\\documents\\iskola\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\idopontfoglalo.core\\entities\\employeeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2222222-2222-2222-2222-222222222222}|Idopontfoglalo.Core\\Idopontfoglalo.Core.csproj|solutionrelative:idopontfoglalo.core\\entities\\employeeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2222222-2222-2222-2222-222222222222}|Idopontfoglalo.Core\\Idopontfoglalo.Core.csproj|c:\\users\\peter\\documents\\iskola\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\idopontfoglalo.core\\interfaces\\iemployeeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2222222-2222-2222-2222-222222222222}|Idopontfoglalo.Core\\Idopontfoglalo.Core.csproj|solutionrelative:idopontfoglalo.core\\interfaces\\iemployeeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A1111111-1111-1111-1111-111111111111}|Idopontfoglalo.Api\\Idopontfoglalo.Api.csproj|c:\\users\\peter\\documents\\iskola\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\idopontfoglalo.api\\contracts\\employeecontracts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A1111111-1111-1111-1111-111111111111}|Idopontfoglalo.Api\\Idopontfoglalo.Api.csproj|solutionrelative:idopontfoglalo.api\\contracts\\employeecontracts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A1111111-1111-1111-1111-111111111111}|Idopontfoglalo.Api\\Idopontfoglalo.Api.csproj|c:\\users\\peter\\documents\\iskola\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\idopontfoglalo.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -37,10 +61,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{C3333333-3333-3333-3333-333333333333}|Idopontfoglalo.Infrastructure\\Idopontfoglalo.Infrastructure.csproj|c:\\users\\peter\\documents\\iskola\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\idopontfoglalo.infrastructure\\services\\availabilityservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C3333333-3333-3333-3333-333333333333}|Idopontfoglalo.Infrastructure\\Idopontfoglalo.Infrastructure.csproj|solutionrelative:idopontfoglalo.infrastructure\\services\\availabilityservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B2222222-2222-2222-2222-222222222222}|Idopontfoglalo.Core\\Idopontfoglalo.Core.csproj|c:\\users\\peter\\documents\\iskola\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\idopontfoglalo.core\\entities\\employeeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B2222222-2222-2222-2222-222222222222}|Idopontfoglalo.Core\\Idopontfoglalo.Core.csproj|solutionrelative:idopontfoglalo.core\\entities\\employeeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C3333333-3333-3333-3333-333333333333}|Idopontfoglalo.Infrastructure\\Idopontfoglalo.Infrastructure.csproj|c:\\users\\peter\\documents\\iskola\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\idopontfoglalo.infrastructure\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -79,10 +99,6 @@
       "RelativeMoniker": "D:0:0:{A1111111-1111-1111-1111-111111111111}|Idopontfoglalo.Api\\Idopontfoglalo.Api.csproj|solutionrelative:idopontfoglalo.api\\middleware\\exceptionhandlingmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A1111111-1111-1111-1111-111111111111}|Idopontfoglalo.Api\\Idopontfoglalo.Api.csproj|c:\\users\\peter\\documents\\iskola\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\idopontfoglalo.api\\controllers\\adminappointmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A1111111-1111-1111-1111-111111111111}|Idopontfoglalo.Api\\Idopontfoglalo.Api.csproj|solutionrelative:idopontfoglalo.api\\controllers\\adminappointmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A1111111-1111-1111-1111-111111111111}|Idopontfoglalo.Api\\Idopontfoglalo.Api.csproj|c:\\users\\peter\\documents\\iskola\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\idopontfoglalo.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A1111111-1111-1111-1111-111111111111}|Idopontfoglalo.Api\\Idopontfoglalo.Api.csproj|solutionrelative:idopontfoglalo.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -106,7 +122,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -117,37 +133,87 @@
               "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "EmployeeService.cs",
+              "DocumentMoniker": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Infrastructure\\Services\\EmployeeService.cs",
+              "RelativeDocumentMoniker": "Idopontfoglalo.Infrastructure\\Services\\EmployeeService.cs",
+              "ToolTip": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Infrastructure\\Services\\EmployeeService.cs",
+              "RelativeToolTip": "Idopontfoglalo.Infrastructure\\Services\\EmployeeService.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-16T09:57:17.723Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
+              "Title": "IEmployeeService.cs",
+              "DocumentMoniker": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Core\\Interfaces\\IEmployeeService.cs",
+              "RelativeDocumentMoniker": "Idopontfoglalo.Core\\Interfaces\\IEmployeeService.cs",
+              "ToolTip": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Core\\Interfaces\\IEmployeeService.cs",
+              "RelativeToolTip": "Idopontfoglalo.Core\\Interfaces\\IEmployeeService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-16T09:56:26.88Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "EmployeeContracts.cs",
+              "DocumentMoniker": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Api\\Contracts\\EmployeeContracts.cs",
+              "RelativeDocumentMoniker": "Idopontfoglalo.Api\\Contracts\\EmployeeContracts.cs",
+              "ToolTip": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Api\\Contracts\\EmployeeContracts.cs",
+              "RelativeToolTip": "Idopontfoglalo.Api\\Contracts\\EmployeeContracts.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-16T09:55:31.796Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "EmployeesController.cs",
+              "DocumentMoniker": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Api\\Controllers\\EmployeesController.cs",
+              "RelativeDocumentMoniker": "Idopontfoglalo.Api\\Controllers\\EmployeesController.cs",
+              "ToolTip": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Api\\Controllers\\EmployeesController.cs",
+              "RelativeToolTip": "Idopontfoglalo.Api\\Controllers\\EmployeesController.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAlwB8AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-16T09:54:47.692Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "AppointmentsController.cs",
               "DocumentMoniker": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Api\\Controllers\\AppointmentsController.cs",
               "RelativeDocumentMoniker": "Idopontfoglalo.Api\\Controllers\\AppointmentsController.cs",
               "ToolTip": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Api\\Controllers\\AppointmentsController.cs",
               "RelativeToolTip": "Idopontfoglalo.Api\\Controllers\\AppointmentsController.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAAAADIAAAAqAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-11T12:11:54.43Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "IAvailabilityService.cs",
-              "DocumentMoniker": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Core\\Interfaces\\IAvailabilityService.cs",
-              "RelativeDocumentMoniker": "Idopontfoglalo.Core\\Interfaces\\IAvailabilityService.cs",
-              "ToolTip": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Core\\Interfaces\\IAvailabilityService.cs",
-              "RelativeToolTip": "Idopontfoglalo.Core\\Interfaces\\IAvailabilityService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "AdminAppointmentsController.cs",
+              "DocumentMoniker": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Api\\Controllers\\AdminAppointmentsController.cs",
+              "RelativeDocumentMoniker": "Idopontfoglalo.Api\\Controllers\\AdminAppointmentsController.cs",
+              "ToolTip": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Api\\Controllers\\AdminAppointmentsController.cs",
+              "RelativeToolTip": "Idopontfoglalo.Api\\Controllers\\AdminAppointmentsController.cs",
+              "ViewState": "AgIAADUAAAAAAAAAAAAuwEkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-11T12:11:26.204Z"
+              "WhenOpened": "2026-02-10T12:42:36.986Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 9,
               "Title": "AvailabilityModels.cs",
               "DocumentMoniker": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Core\\Models\\AvailabilityModels.cs",
               "RelativeDocumentMoniker": "Idopontfoglalo.Core\\Models\\AvailabilityModels.cs",
@@ -159,44 +225,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "AppointmentServiceTests.cs",
-              "DocumentMoniker": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Tests\\AppointmentServiceTests.cs",
-              "RelativeDocumentMoniker": "Idopontfoglalo.Tests\\AppointmentServiceTests.cs",
-              "ToolTip": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Tests\\AppointmentServiceTests.cs",
-              "RelativeToolTip": "Idopontfoglalo.Tests\\AppointmentServiceTests.cs",
-              "ViewState": "AgIAAB8AAAAAAAAAAAAQwB8AAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-10T12:46:06.727Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Api\\Program.cs",
-              "RelativeDocumentMoniker": "Idopontfoglalo.Api\\Program.cs",
-              "ToolTip": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Api\\Program.cs",
-              "RelativeToolTip": "Idopontfoglalo.Api\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAE8AAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-09T12:49:55.487Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Idopontfoglalo.Infrastructure.csproj",
-              "DocumentMoniker": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Infrastructure\\Idopontfoglalo.Infrastructure.csproj",
-              "RelativeDocumentMoniker": "Idopontfoglalo.Infrastructure\\Idopontfoglalo.Infrastructure.csproj",
-              "ToolTip": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Infrastructure\\Idopontfoglalo.Infrastructure.csproj",
-              "RelativeToolTip": "Idopontfoglalo.Infrastructure\\Idopontfoglalo.Infrastructure.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-02-10T08:37:09.562Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 4,
               "Title": "EmployeeService.cs",
               "DocumentMoniker": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Core\\Entities\\EmployeeService.cs",
               "RelativeDocumentMoniker": "Idopontfoglalo.Core\\Entities\\EmployeeService.cs",
@@ -208,7 +237,55 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
+              "Title": "IAvailabilityService.cs",
+              "DocumentMoniker": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Core\\Interfaces\\IAvailabilityService.cs",
+              "RelativeDocumentMoniker": "Idopontfoglalo.Core\\Interfaces\\IAvailabilityService.cs",
+              "ToolTip": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Core\\Interfaces\\IAvailabilityService.cs",
+              "RelativeToolTip": "Idopontfoglalo.Core\\Interfaces\\IAvailabilityService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-11T12:11:26.204Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "AppointmentServiceTests.cs",
+              "DocumentMoniker": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Tests\\AppointmentServiceTests.cs",
+              "RelativeDocumentMoniker": "Idopontfoglalo.Tests\\AppointmentServiceTests.cs",
+              "ToolTip": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Tests\\AppointmentServiceTests.cs",
+              "RelativeToolTip": "Idopontfoglalo.Tests\\AppointmentServiceTests.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAQwB8AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-10T12:46:06.727Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Api\\Program.cs",
+              "RelativeDocumentMoniker": "Idopontfoglalo.Api\\Program.cs",
+              "ToolTip": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Api\\Program.cs",
+              "RelativeToolTip": "Idopontfoglalo.Api\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAE8AAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-09T12:49:55.487Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Idopontfoglalo.Infrastructure.csproj",
+              "DocumentMoniker": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Infrastructure\\Idopontfoglalo.Infrastructure.csproj",
+              "RelativeDocumentMoniker": "Idopontfoglalo.Infrastructure\\Idopontfoglalo.Infrastructure.csproj",
+              "ToolTip": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Infrastructure\\Idopontfoglalo.Infrastructure.csproj",
+              "RelativeToolTip": "Idopontfoglalo.Infrastructure\\Idopontfoglalo.Infrastructure.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-02-10T08:37:09.562Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "Availability.cs",
               "DocumentMoniker": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Core\\Entities\\Availability.cs",
               "RelativeDocumentMoniker": "Idopontfoglalo.Core\\Entities\\Availability.cs",
@@ -220,7 +297,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 15,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Infrastructure\\Data\\AppDbContext.cs",
               "RelativeDocumentMoniker": "Idopontfoglalo.Infrastructure\\Data\\AppDbContext.cs",
@@ -232,7 +309,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 21,
               "Title": "SlotServiceTests.cs",
               "DocumentMoniker": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Tests\\SlotServiceTests.cs",
               "RelativeDocumentMoniker": "Idopontfoglalo.Tests\\SlotServiceTests.cs",
@@ -244,7 +321,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 17,
               "Title": "TestDbFactory.cs",
               "DocumentMoniker": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Tests\\TestDbFactory.cs",
               "RelativeDocumentMoniker": "Idopontfoglalo.Tests\\TestDbFactory.cs",
@@ -256,7 +333,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 13,
               "Title": "Service.cs",
               "DocumentMoniker": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Core\\Entities\\Service.cs",
               "RelativeDocumentMoniker": "Idopontfoglalo.Core\\Entities\\Service.cs",
@@ -268,7 +345,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 10,
               "Title": "AuthService.cs",
               "DocumentMoniker": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Infrastructure\\Services\\AuthService.cs",
               "RelativeDocumentMoniker": "Idopontfoglalo.Infrastructure\\Services\\AuthService.cs",
@@ -280,7 +357,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 14,
               "Title": "AvailabilityService.cs",
               "DocumentMoniker": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Infrastructure\\Services\\AvailabilityService.cs",
               "RelativeDocumentMoniker": "Idopontfoglalo.Infrastructure\\Services\\AvailabilityService.cs",
@@ -292,7 +369,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 18,
               "Title": "Employee.cs",
               "DocumentMoniker": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Core\\Entities\\Employee.cs",
               "RelativeDocumentMoniker": "Idopontfoglalo.Core\\Entities\\Employee.cs",
@@ -304,7 +381,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 19,
               "Title": "Appointment.cs",
               "DocumentMoniker": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Core\\Entities\\Appointment.cs",
               "RelativeDocumentMoniker": "Idopontfoglalo.Core\\Entities\\Appointment.cs",
@@ -316,7 +393,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 20,
               "Title": "AppointmentService.cs",
               "DocumentMoniker": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Infrastructure\\Services\\AppointmentService.cs",
               "RelativeDocumentMoniker": "Idopontfoglalo.Infrastructure\\Services\\AppointmentService.cs",
@@ -328,19 +405,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "AdminAppointmentsController.cs",
-              "DocumentMoniker": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Api\\Controllers\\AdminAppointmentsController.cs",
-              "RelativeDocumentMoniker": "Idopontfoglalo.Api\\Controllers\\AdminAppointmentsController.cs",
-              "ToolTip": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Api\\Controllers\\AdminAppointmentsController.cs",
-              "RelativeToolTip": "Idopontfoglalo.Api\\Controllers\\AdminAppointmentsController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-10T12:42:36.986Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 23,
               "Title": "ExceptionHandlingMiddleware.cs",
               "DocumentMoniker": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Api\\Middleware\\ExceptionHandlingMiddleware.cs",
               "RelativeDocumentMoniker": "Idopontfoglalo.Api\\Middleware\\ExceptionHandlingMiddleware.cs",
@@ -352,7 +417,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 22,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Core\\Entities\\User.cs",
               "RelativeDocumentMoniker": "Idopontfoglalo.Core\\Entities\\User.cs",
@@ -364,7 +429,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 25,
               "Title": "AvailabilityController.cs",
               "DocumentMoniker": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Api\\Controllers\\AvailabilityController.cs",
               "RelativeDocumentMoniker": "Idopontfoglalo.Api\\Controllers\\AvailabilityController.cs",
@@ -376,7 +441,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 24,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Api\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "Idopontfoglalo.Api\\Controllers\\AuthController.cs",
@@ -388,7 +453,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 27,
               "Title": "Idopontfoglalo.Core.csproj",
               "DocumentMoniker": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Core\\Idopontfoglalo.Core.csproj",
               "RelativeDocumentMoniker": "Idopontfoglalo.Core\\Idopontfoglalo.Core.csproj",
@@ -400,7 +465,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 26,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Api\\appsettings.json",
               "RelativeDocumentMoniker": "Idopontfoglalo.Api\\appsettings.json",

@@ -29,6 +29,19 @@ public class EmployeesController : ControllerBase
         var item = await _employees.GetByIdAsync(id);
         return item is null ? NotFound() : Ok(item);
     }
+    [HttpGet("{id:int}/services")]
+    [Authorize(Roles = "ADMIN")]
+    public async Task<ActionResult<List<int>>> GetServices([FromRoute] int id)
+        => Ok(await _employees.GetServiceIdsAsync(id));
+
+    [HttpPut("{id:int}/services")]
+    [Authorize(Roles = "ADMIN")]
+    public async Task<IActionResult> SetServices([FromRoute] int id, [FromBody] EmployeeServicesUpdateRequest req)
+    {
+        await _employees.SetServicesAsync(id, req.ServiceIds ?? new List<int>());
+        return NoContent();
+    }
+
 
     [HttpPost]
     [Authorize(Roles = "ADMIN")]

@@ -30,6 +30,54 @@ public class EmployeeService : IEmployeeService
             .Select(e => new EmployeeDto(e.Id, e.Name, e.Email, e.Phone, e.IsActive))
             .FirstOrDefaultAsync();
     }
+    public async Task<List<int>> GetServiceIdsAsync(int employeeId)
+    {
+        var employeeExists = await _db.Employees.AnyAsync(e => e.Id == employeeId);
+        if (!employeeExists)
+            throw new BusinessException("A dolgozó nem található.");
+
+        return await _db.EmployeeServices
+            .Where(es => es.EmployeeId == employeeId)
+            .Select(es => es.ServiceId)
+            .OrderBy(id => id)
+            .ToListAsync();
+    }
+
+    public async Task SetServicesAsync(int employeeId, List<int> serviceIds)
+    {
+        var employeeExists = await _db.Employees.AnyAsync(e => e.Id == employeeId);
+        if (!employeeExists)
+            throw new BusinessException("A dolgozó nem található.");
+
+        var normalizedIds = (serviceIds ?? new List<int>())
+            .Where(id => id > 0)
+            .Distinct()
+            .ToList();
+
+        if (normalizedIds.Count > 0)
+        {
+            var existingServiceCount = await _db.Services.CountAsync(s => normalizedIds.Contains(s.Id) && s.IsActive);
+            if (existingServiceCount != normalizedIds.Count)
+                throw new BusinessException("A megadott szolgáltatások között érvénytelen vagy inaktív elem található.");
+        }
+
+        var currentLinks = await _db.EmployeeServices
+            .Where(es => es.EmployeeId == employeeId)
+            .ToListAsync();
+
+        _db.EmployeeServices.RemoveRange(currentLinks);
+
+        foreach (var serviceId in normalizedIds)
+        {
+            _db.EmployeeServices.Add(new Core.Entities.EmployeeServiceService
+            {
+                EmployeeId = employeeId,
+                ServiceId = serviceId
+            });
+        }
+
+        await _db.SaveChangesAsync();
+    }
 
     public async Task<EmployeeDto> CreateAsync(EmployeeUpsertModel model)
     {

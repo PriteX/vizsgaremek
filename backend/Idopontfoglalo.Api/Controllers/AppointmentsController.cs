@@ -2,6 +2,7 @@ using System.Security.Claims;
 using Idopontfoglalo.Api.Contracts;
 using Idopontfoglalo.Core.Interfaces;
 using Idopontfoglalo.Core.Models;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,7 +32,7 @@ public class AppointmentsController : ControllerBase
     }
 
     [HttpGet("me")]
-    [Authorize]
+    [Authorize] 
     public async Task<ActionResult<List<AppointmentDto>>> MyAppointments()
     {
         var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);

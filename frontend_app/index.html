@@ -24,7 +24,7 @@
         </label>
         <button type="submit">Belépés</button>
         <button id="logoutBtn" type="button">Kijelentkezés</button>
-
+        <button id="openAdminBtn" type="button" class="hidden">Admin felület</button>
       </form>
 
       <hr />
@@ -87,6 +87,37 @@
       <div id="myAppointments"></div>
     </section>
   </main>
+
+  <div id="adminModal" class="modal hidden" aria-hidden="true">
+    <div class="modal-backdrop" id="adminModalCloseBackdrop"></div>
+    <div class="modal-dialog card" role="dialog" aria-modal="true" aria-labelledby="adminModalTitle">
+      <div class="modal-header">
+        <h2 id="adminModalTitle">Admin felület</h2>
+        <button id="adminModalCloseBtn" type="button" class="modal-close" aria-label="Bezárás">×</button>
+      </div>
+      <p class="muted">Csak ADMIN jogosultsággal érhető el.</p>
+
+      <div class="row">
+        <div class="col">
+          <label>Tól
+            <input id="adminDateFrom" type="date" />
+          </label>
+        </div>
+        <div class="col">
+          <label>Ig
+            <input id="adminDateTo" type="date" />
+          </label>
+        </div>
+      </div>
+
+      <div class="row">
+        <button id="loadAdminAppointmentsBtn" type="button">Foglalások lekérése</button>
+      </div>
+
+      <div id="adminAppointments"></div>
+      <div class="status" id="adminStatus"></div>
+    </div>
+  </div>
 
   <footer class="container muted">
     <small>Backend base URL: <span id="baseUrlLabel"></span></small>
