@@ -1,3 +1,4 @@
+using Idopontfoglalo.Core.Entities;
 using Idopontfoglalo.Core.Exceptions;
 using Idopontfoglalo.Core.Interfaces;
 using Idopontfoglalo.Core.Models;
@@ -92,6 +93,20 @@ public class EmployeeService : IEmployeeService
         _db.Employees.Add(entity);
         await _db.SaveChangesAsync();
 
+        var defaultAvailability = Enumerable.Range(1, 5)
+            .Select(dayOfWeek => new Availability
+            {
+                EmployeeId = entity.Id,
+                DayOfWeek = dayOfWeek,
+                StartTime = TimeSpan.FromHours(9),
+                EndTime = TimeSpan.FromHours(17),
+                IsActive = true
+            });
+
+        _db.Availability.AddRange(defaultAvailability);
+        await _db.SaveChangesAsync();
+
+
         return new EmployeeDto(entity.Id, entity.Name, entity.Email, entity.Phone, entity.IsActive);
     }
 
@@ -116,7 +131,21 @@ public class EmployeeService : IEmployeeService
         if (entity is null)
             return;
 
-        entity.IsActive = false;
+        var hasAppointments = await _db.Appointments.AnyAsync(a => a.EmployeeId == id);
+        if (hasAppointments)
+            throw new BusinessException("A dolgozóhoz tartozik foglalás, ezért nem törölhető.");
+
+        var availabilities = await _db.Availability
+            .Where(a => a.EmployeeId == id)
+            .ToListAsync();
+        _db.Availability.RemoveRange(availabilities);
+
+        var serviceLinks = await _db.EmployeeServices
+            .Where(es => es.EmployeeId == id)
+            .ToListAsync();
+        _db.EmployeeServices.RemoveRange(serviceLinks);
+
+        _db.Employees.Remove(entity);
         await _db.SaveChangesAsync();
     }
 }

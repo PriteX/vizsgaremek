@@ -39,7 +39,7 @@ function setAuthenticatedView(email) {
 
   const openAdminBtn = el("openAdminBtn");
   if (openAdminBtn) {
-    openAdminBtn.classList.toggle("hidden", !isLoggedIn);
+openAdminBtn.classList.toggle("hidden", !isLoggedIn || !isAdmin());
   }
 }
 
@@ -132,7 +132,7 @@ function updateAdminButtonVisibility() {
   }
 
   const isLoggedIn = Boolean(getToken());
-  openAdminBtn.classList.toggle("hidden", !isLoggedIn);
+ openAdminBtn.classList.toggle("hidden", !isLoggedIn || !isAdmin());
 }
 
 function findServiceName(serviceId) {
