@@ -123,3 +123,17 @@ hr{
   line-height: 1;
   padding: 0;
 }
+.login-success{
+  margin: 14px 0 0;
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  font-weight: 700;
+  color: #9bffc8;
+}
+
+
+.header-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}

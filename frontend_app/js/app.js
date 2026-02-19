@@ -13,6 +13,36 @@ function setStatus(id, msg) {
   target.textContent = msg || "";
 }
 
+function setAuthenticatedView(email) {
+  const isLoggedIn = Boolean(getToken());
+
+  document.querySelectorAll(".booking-panel").forEach((section) => {
+    section.classList.toggle("hidden", !isLoggedIn);
+  });
+
+  const authCard = el("authCard");
+  if (authCard) {
+    authCard.classList.toggle("hidden", isLoggedIn);
+  }
+
+  const loginSuccessBanner = el("loginSuccessBanner");
+  if (loginSuccessBanner) {
+    const bannerText = isLoggedIn ? `Sikeres belépés ${email || "Felhasználó"}` : "";
+    loginSuccessBanner.textContent = bannerText;
+    loginSuccessBanner.classList.toggle("hidden", !bannerText);
+  }
+
+  const headerLogoutBtn = el("headerLogoutBtn");
+  if (headerLogoutBtn) {
+    headerLogoutBtn.classList.toggle("hidden", !isLoggedIn);
+  }
+
+  const openAdminBtn = el("openAdminBtn");
+  if (openAdminBtn) {
+    openAdminBtn.classList.toggle("hidden", !isLoggedIn);
+  }
+}
+
 function getToken() {
   return localStorage.getItem("token");
 }
@@ -101,7 +131,8 @@ function updateAdminButtonVisibility() {
     return;
   }
 
-  openAdminBtn.classList.toggle("hidden", !isAdmin());
+  const isLoggedIn = Boolean(getToken());
+  openAdminBtn.classList.toggle("hidden", !isLoggedIn);
 }
 
 function findServiceName(serviceId) {
@@ -175,8 +206,10 @@ function resetAdminPanel() {
 function logout() {
   localStorage.removeItem("token");
   localStorage.removeItem("role");
+   localStorage.removeItem("email");
 
   setStatus("authStatus", "Kijelentkezve.");
+   setAuthenticatedView();
 
   const myAppointments = el("myAppointments");
   if (myAppointments) {
@@ -240,13 +273,17 @@ async function onLogin(e) {
 
     localStorage.setItem("token", res.token);
     localStorage.setItem("role", normalizeRole(res.role));
+    localStorage.setItem("email", res.email);
 
     setStatus("authStatus", `Sikeres belépés: ${res.email} (${normalizeRole(res.role) || "USER"})`);
+    setAuthenticatedView(res.email);
     updateAdminButtonVisibility();
     await loadMyAppointments();
   } catch (err) {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
+     localStorage.removeItem("email");
+    setAuthenticatedView();
     updateAdminButtonVisibility();
     setStatus("authStatus", `Hiba: ${err.message}`);
   }
@@ -269,13 +306,17 @@ async function onRegister(e) {
 
     localStorage.setItem("token", res.token);
     localStorage.setItem("role", normalizeRole(res.role));
+        localStorage.setItem("email", res.email);
 
     setStatus("authStatus", `Sikeres regisztráció és belépés: ${res.email}`);
+    setAuthenticatedView(res.email);
     updateAdminButtonVisibility();
     await loadMyAppointments();
   } catch (err) {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
+      localStorage.removeItem("email");
+    setAuthenticatedView();
     updateAdminButtonVisibility();
     setStatus("authStatus", `Hiba: ${err.message}`);
   }
@@ -285,6 +326,10 @@ async function loadSlots() {
   setStatus("bookingStatus", "");
   el("slots").innerHTML = "";
 
+    if (!getToken()) {
+    setStatus("bookingStatus", "Előbb jelentkezz be a foglaláshoz.");
+    return;
+  }
   try {
     const employeeId = Number(el("employeeSelect").value);
     const serviceId = Number(el("serviceSelect").value);
@@ -312,6 +357,12 @@ async function loadSlots() {
 
 async function bookSlot(employeeId, serviceId, startAt) {
   setStatus("bookingStatus", "");
+
+  if (!getToken()) {
+    setStatus("bookingStatus", "Előbb jelentkezz be a foglaláshoz.");
+    return;
+  }
+
 
   try {
     await apiFetch("/api/appointments", {
@@ -373,13 +424,19 @@ async function loadMyAppointments() {
       container.appendChild(row);
     }
   } catch (err) {
+        if (/401|403/.test(String(err.message))) {
+      logout();
+      container.innerHTML = "<p class='muted'>A munkamenet lejárt, jelentkezz be újra.</p>";
+      return;
+    }
+
     container.innerHTML = `<p class='muted'>Hiba a foglalások lekérésekor: ${err.message}</p>`;
   }
 }
 
 function openAdminModal() {
   if (!isAdmin()) {
-    setStatus("adminStatus", "Nincs jogosultság.");
+     setStatus("authStatus", "Nincs admin jogosultságod.");
     return;
   }
 
@@ -618,7 +675,7 @@ async function loadAdminAppointments() {
 document.addEventListener("DOMContentLoaded", async () => {
   el("loginForm").addEventListener("submit", onLogin);
   el("registerForm").addEventListener("submit", onRegister);
-  el("logoutBtn").addEventListener("click", logout);
+el("headerLogoutBtn").addEventListener("click", logout);
   el("loadSlotsBtn").addEventListener("click", loadSlots);
   el("loadMyAppointmentsBtn").addEventListener("click", loadMyAppointments);
 
@@ -660,9 +717,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   const token = getToken();
 
   if (token) {
+        const payload = decodeJwtPayload(token);
+    const savedEmail = payload?.email || payload?.unique_name || payload?.sub || localStorage.getItem("email") || "Felhasználó";
     setStatus("authStatus", "Bejelentkezve (mentett munkamenet).");
+    setAuthenticatedView(savedEmail);
     await loadMyAppointments();
   } else {
+       setAuthenticatedView();
     setStatus("authStatus", "Nem vagy bejelentkezve.");
     el("myAppointments").innerHTML = "<p class='muted'>A foglalásokhoz jelentkezz be.</p>";
   }

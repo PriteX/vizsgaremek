@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Idopontfoglalo.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3cc3b719d72cc5f69c262e45549d85e67ed65ecd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+39c0af6ec3560b579c05272e2e31b5c6f7af4863")]
 [assembly: System.Reflection.AssemblyProductAttribute("Idopontfoglalo.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Idopontfoglalo.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
