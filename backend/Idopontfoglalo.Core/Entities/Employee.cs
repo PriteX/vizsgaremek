@@ -16,6 +16,11 @@ public class Employee
     [Column("is_active")]
     public bool IsActive { get; set; } = true;
 
+    [Column("location_id")]
+    public int? LocationId { get; set; }
+    public Location? Location { get; set; }
+
+
     public ICollection<EmployeeServiceService> EmployeeServices { get; set; } = new List<EmployeeServiceService>();
     public ICollection<Availability> Availabilities { get; set; } = new List<Availability>();
     public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();

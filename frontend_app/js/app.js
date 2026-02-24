@@ -2,7 +2,9 @@ const el = (id) => document.getElementById(id);
 
 const state = {
   services: [],
-  employees: []
+   employees: [],
+  locations: [],
+  selectedLocationId: 0
 };
 
 function setStatus(id, msg) {
@@ -135,6 +137,85 @@ function updateAdminButtonVisibility() {
  openAdminBtn.classList.toggle("hidden", !isLoggedIn || !isAdmin());
 }
 
+function updateLocationSelectors() {
+  const categorySelect = el("categorySelect");
+  const employeeLocation = el("employeeLocation");
+
+  const activeLocations = state.locations.filter((location) => location.isActive);
+
+  if (categorySelect) {
+    categorySelect.innerHTML = activeLocations
+      .map((location) => `<option value="${location.id}">${location.name}</option>`)
+      .join("");
+
+    if (!activeLocations.length) {
+      categorySelect.innerHTML = "<option value=''>Nincs elérhető helyszín</option>";
+      state.selectedLocationId = 0;
+    } else {
+      const hasSelected = activeLocations.some((location) => location.id === state.selectedLocationId);
+      state.selectedLocationId = hasSelected ? state.selectedLocationId : activeLocations[0].id;
+      categorySelect.value = String(state.selectedLocationId);
+    }
+  }
+
+  if (employeeLocation) {
+    employeeLocation.innerHTML = ["<option value=''>Nincs hozzárendelve</option>"]
+      .concat(state.locations.map((location) => `<option value="${location.id}">${location.name}${location.isActive ? "" : " (inaktív)"}</option>`))
+      .join("");
+  }
+}
+
+function getEmployeesBySelectedLocation() {
+  if (!state.selectedLocationId) {
+    return [];
+  }
+
+  return state.employees.filter((employee) => employee.isActive && Number(employee.locationId) === Number(state.selectedLocationId));
+}
+
+function renderServicesByLocation() {
+  const serviceSelect = el("serviceSelect");
+  if (!serviceSelect) {
+    return;
+  }
+
+  const employeesAtLocation = getEmployeesBySelectedLocation();
+  const serviceIdSet = new Set();
+
+  for (const employee of employeesAtLocation) {
+    const serviceIds = Array.isArray(employee.serviceIds) ? employee.serviceIds : [];
+    for (const serviceId of serviceIds) {
+      serviceIdSet.add(serviceId);
+    }
+  }
+
+  const visibleServices = state.services
+    .filter((service) => service.isActive && serviceIdSet.has(service.id))
+    .sort((a, b) => a.name.localeCompare(b.name, "hu-HU"));
+
+  if (!visibleServices.length) {
+    serviceSelect.innerHTML = "<option value=''>Nincs elérhető szolgáltatás ezen a helyszínen</option>";
+    return;
+  }
+
+  serviceSelect.innerHTML = visibleServices
+    .map((service) => `<option value="${service.id}">${service.name} (${service.durationMinutes} perc)</option>`)
+    .join("");
+}
+
+function onLocationChange() {
+  const categorySelect = el("categorySelect");
+  if (!categorySelect) {
+    return;
+  }
+
+  state.selectedLocationId = Number(categorySelect.value || 0);
+  renderServicesByLocation();
+  filterEmployeesBySelectedService();
+  el("slots").innerHTML = "";
+  setStatus("bookingStatus", "");
+}
+
 function findServiceName(serviceId) {
   return state.services.find((s) => s.id === Number(serviceId))?.name || `Szolgáltatás #${serviceId}`;
 }
@@ -179,18 +260,20 @@ function filterEmployeesBySelectedService() {
   }
 
   const selectedServiceId = Number(serviceSelect.value || 0);
-  const employees = state.employees.filter((e) => e.isActive);
+    const servicesInCategory = getServicesBySelectedCategory();
+  const categoryServiceIds = new Set(servicesInCategory.map((s) => s.id));
+  const employees = getEmployeesBySelectedLocation();
 
-  const eligible = selectedServiceId > 0
-    ? employees.filter((e) => !Array.isArray(e.serviceIds) || e.serviceIds.includes(selectedServiceId))
-    : employees;
+  const eligible = employees.filter((employee) => {
+    const employeeServiceIds = Array.isArray(employee.serviceIds) ? employee.serviceIds : [];
+    return selectedServiceId > 0 ? employeeServiceIds.includes(selectedServiceId) : employeeServiceIds.length > 0;
+  });
 
-  employeeSelect.innerHTML = eligible
-    .map((e) => `<option value="${e.id}">${e.name}</option>`)
-    .join("");
+
+  employeeSelect.innerHTML = eligible.map((employee) => `<option value="${employee.id}">${employee.name}</option>`).join("");
 
   if (!eligible.length) {
-    employeeSelect.innerHTML = "<option value=''>Nincs megfelelő dolgozó</option>";
+   employeeSelect.innerHTML = "<option value=''>Nincs megfelelő dolgozó ezen a helyszínen</option>";
   }
 }
 
@@ -232,12 +315,20 @@ async function loadLookups() {
   setStatus("baseUrlLabel", baseUrl);
 
   state.services = await apiFetch("/api/services");
-  state.employees = await apiFetch("/api/employees");
+  state.locations = await apiFetch("/api/locations");
 
-  el("serviceSelect").innerHTML = state.services
-    .filter((s) => s.isActive)
-    .map((s) => `<option value="${s.id}">${s.name} (${s.durationMinutes} perc)</option>`)
-    .join("");
+  const baseEmployees = await apiFetch("/api/employees");
+  state.employees = await Promise.all(baseEmployees.map(async (employee) => {
+    try {
+      const serviceIds = await apiFetch(`/api/employees/${employee.id}/services`);
+      return { ...employee, serviceIds };
+    } catch {
+      return { ...employee, serviceIds: [] };
+    }
+  }));
+
+ updateLocationSelectors();
+  renderServicesByLocation();
 
   filterEmployeesBySelectedService();
 
@@ -335,6 +426,10 @@ async function loadSlots() {
     const serviceId = Number(el("serviceSelect").value);
     const date = el("dateInput").value;
 
+   if (!employeeId || !serviceId || !date) {
+      setStatus("bookingStatus", "Válassz helyszínt, szolgáltatást, dolgozót és dátumot.");
+      return;
+    }
     const slots = await apiFetch(`/api/availability/slots?employeeId=${employeeId}&serviceId=${serviceId}&date=${date}`);
 
     if (!slots.length) {
@@ -449,7 +544,10 @@ function openAdminModal() {
   modal.setAttribute("aria-hidden", "false");
    resetEmployeeForm();
   loadAdminEmployees();
+   loadAdminLocations();
+  resetLocationForm();
 }
+
 
 
 function resetEmployeeForm() {
@@ -510,7 +608,7 @@ async function loadAdminEmployees() {
         .join(", ");
 
       info.innerHTML = `<div>${employee.name}</div>
-        <div class="muted">E-mail: ${employee.email || "-"} · Telefon: ${employee.phone || "-"} · Állapot: ${employee.isActive ? "Aktív" : "Inaktív"}</div>
+            <div class="muted">E-mail: ${employee.email || "-"} · Telefon: ${employee.phone || "-"} · Helyszín: ${employee.locationName || "nincs"} · Állapot: ${employee.isActive ? "Aktív" : "Inaktív"}</div>
         <div class="muted">Szolgáltatások: ${serviceNames || "nincs kiválasztva"}</div>`;
 
       const actions = document.createElement("div");
@@ -525,6 +623,7 @@ async function loadAdminEmployees() {
         el("employeeEmail").value = employee.email || "";
         el("employeePhone").value = employee.phone || "";
         el("employeeIsActive").checked = !!employee.isActive;
+         el("employeeLocation").value = employee.locationId ? String(employee.locationId) : "";
       
         try {
           const serviceIds = await apiFetch(`/api/employees/${employee.id}/services`);
@@ -577,13 +676,15 @@ async function onEmployeeSubmit(e) {
   const email = el("employeeEmail").value.trim() || null;
   const phone = el("employeePhone").value.trim() || null;
   const isActive = !!el("employeeIsActive").checked;
+    const locationIdRaw = el("employeeLocation").value;
+  const locationId = locationIdRaw ? Number(locationIdRaw) : null;
 const serviceIds = getSelectedEmployeeServiceIds();
   if (!name) {
     setStatus("adminStatus", "A név megadása kötelező.");
     return;
   }
 
-  const payload = { name, email, phone, isActive };
+    const payload = { name, email, phone, isActive, locationId };
 
   try {
     if (id > 0) {
@@ -610,6 +711,102 @@ const serviceIds = getSelectedEmployeeServiceIds();
 
     resetEmployeeForm();
     await loadLookups();
+    await loadAdminEmployees();
+  } catch (err) {
+    setStatus("adminStatus", `Hiba: ${err.message}`);
+  }
+}
+function resetLocationForm() {
+  const locationForm = el("locationForm");
+  if (locationForm) {
+    locationForm.reset();
+  }
+
+  el("locationId").value = "";
+  el("locationIsActive").checked = true;
+}
+
+async function loadAdminLocations() {
+  if (!isAdmin()) {
+    return;
+  }
+
+  const container = el("adminLocations");
+  if (!container) {
+    return;
+  }
+
+  container.innerHTML = "";
+
+  const items = await apiFetch("/api/locations");
+  if (!items.length) {
+    container.innerHTML = "<p class='muted'>Nincs helyszín.</p>";
+    return;
+  }
+
+  for (const location of items) {
+    const row = document.createElement("div");
+    row.className = "app-item";
+    row.innerHTML = `<div><div>${location.name}</div><div class='muted'>Állapot: ${location.isActive ? "Aktív" : "Inaktív"}</div></div>`;
+
+    const actions = document.createElement("div");
+    actions.className = "row";
+
+    const editBtn = document.createElement("button");
+    editBtn.type = "button";
+    editBtn.textContent = "Szerkesztés";
+    editBtn.addEventListener("click", () => {
+      el("locationId").value = location.id;
+      el("locationName").value = location.name;
+      el("locationIsActive").checked = !!location.isActive;
+    });
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.type = "button";
+    deleteBtn.textContent = "Inaktiválás";
+    deleteBtn.addEventListener("click", async () => {
+      await apiFetch(`/api/locations/${location.id}`, { method: "DELETE" });
+      await loadLookups();
+      await loadAdminLocations();
+      await loadAdminEmployees();
+    });
+
+    actions.appendChild(editBtn);
+    actions.appendChild(deleteBtn);
+    row.appendChild(actions);
+    container.appendChild(row);
+  }
+}
+
+async function onLocationSubmit(e) {
+  e.preventDefault();
+
+  if (!isAdmin()) {
+    setStatus("adminStatus", "Nincs jogosultság.");
+    return;
+  }
+
+  const id = Number(el("locationId").value || 0);
+  const name = el("locationName").value.trim();
+  const isActive = !!el("locationIsActive").checked;
+
+  if (!name) {
+    setStatus("adminStatus", "A helyszín neve kötelező.");
+    return;
+  }
+
+  try {
+    if (id > 0) {
+      await apiFetch(`/api/locations/${id}`, { method: "PUT", body: JSON.stringify({ name, isActive }) });
+      setStatus("adminStatus", "Helyszín frissítve.");
+    } else {
+      await apiFetch("/api/locations", { method: "POST", body: JSON.stringify({ name, isActive }) });
+      setStatus("adminStatus", "Helyszín létrehozva.");
+    }
+
+    resetLocationForm();
+    await loadLookups();
+    await loadAdminLocations();
     await loadAdminEmployees();
   } catch (err) {
     setStatus("adminStatus", `Hiba: ${err.message}`);
@@ -706,6 +903,21 @@ el("headerLogoutBtn").addEventListener("click", logout);
   const employeeResetBtn = el("employeeResetBtn");
   if (employeeResetBtn) {
     employeeResetBtn.addEventListener("click", resetEmployeeForm);
+  }
+
+const categorySelect = el("categorySelect");
+  if (categorySelect) {
+    categorySelect.addEventListener("change", onLocationChange);
+  }
+
+  const locationForm = el("locationForm");
+  if (locationForm) {
+    locationForm.addEventListener("submit", onLocationSubmit);
+  }
+
+  const locationResetBtn = el("locationResetBtn");
+  if (locationResetBtn) {
+    locationResetBtn.addEventListener("click", resetLocationForm);
   }
 
   const serviceSelect = el("serviceSelect");

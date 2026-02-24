@@ -11,6 +11,7 @@ public class AppDbContext : DbContext
     public DbSet<Role> Roles => Set<Role>();
     public DbSet<User> Users => Set<User>();
     public DbSet<Service> Services => Set<Service>();
+    public DbSet<Location> Locations => Set<Location>();
     public DbSet<Employee> Employees => Set<Employee>();
     public DbSet<EmployeeServiceService> EmployeeServices => Set<EmployeeServiceService>();
     public DbSet<Availability> Availability => Set<Availability>();
@@ -25,6 +26,16 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<User>()
             .HasIndex(u => u.Email)
             .IsUnique();
+
+        modelBuilder.Entity<Location>()
+       .HasIndex(l => l.Name)
+       .IsUnique();
+
+        modelBuilder.Entity<Employee>()
+            .HasOne(e => e.Location)
+            .WithMany(l => l.Employees)
+            .HasForeignKey(e => e.LocationId)
+            .OnDelete(DeleteBehavior.SetNull);
 
         modelBuilder.Entity<Idopontfoglalo.Core.Entities.EmployeeServiceService>()
      .HasKey(es => new { es.EmployeeId, es.ServiceId });

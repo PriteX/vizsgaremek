@@ -59,37 +59,44 @@
       <div class="status" id="authStatus"></div>
     </section>
 
-   <section class="card booking-panel hidden">
-      <h2>Foglalás</h2>
+      <section class="booking-workspace booking-panel hidden">
+      <section class="card booking-category-card">
+        <h2>Helyszín kiválasztása</h2>
+        <label>Hova szeretnél időpontot foglalni?
+          <select id="categorySelect"></select>
+        </label>
+        <p class="muted">A kiválasztott helyszínhez tartozó szolgáltatások és dolgozók jelennek meg jobb oldalon.</p>
+      </section>
 
-      <div class="row">
-        <div class="col">
-          <label>Szolgáltatás
-            <select id="serviceSelect"></select>
-          </label>
+   <section class="card">
+        <h2>Foglalás</h2>
+            <div class="row">
+          <div class="col">
+            <label>Szolgáltatás
+              <select id="serviceSelect"></select>
+            </label>
+          </div>
+          <div class="col">
+            <label>Dolgozó
+              <select id="employeeSelect"></select>
+            </label>
+          </div>
         </div>
-        <div class="col">
-          <label>Dolgozó
-            <select id="employeeSelect"></select>
-          </label>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col">
-          <label>Dátum
-            <input type="date" id="dateInput" />
-          </label>
-        </div>
-        <div class="col">
-          <button id="loadSlotsBtn" type="button">Szabad időpontok</button>
-        </div>
+        <div class="row">
+          <div class="col">
+            <label>Dátum
+              <input type="date" id="dateInput" />
+            </label>
+          </div>
+          <div class="col">
+            <button id="loadSlotsBtn" type="button">Szabad időpontok</button>
+          </div>
       </div>
 
       <div id="slots" class="slots"></div>
 
-      <div class="status" id="bookingStatus"></div>
-    </section>
+           <div class="status" id="bookingStatus"></div>
+      </section>
 
       <section class="card booking-panel hidden">
       <h2>Saját foglalások</h2>
@@ -147,6 +154,11 @@
               <input id="employeePhone" type="text" placeholder="(opcionális)" />
             </label>
           </div>
+                    <div class="col">
+            <label>Helyszín
+              <select id="employeeLocation"></select>
+            </label>
+          </div>
         </div>
 
         <div class="row">
@@ -167,7 +179,29 @@
           <button id="employeeResetBtn" type="button">Űrlap törlése</button>
         </div>
       </form>
+      <hr />
+      <h3>Helyszínek kezelése</h3>
+      <form id="locationForm">
+        <input id="locationId" type="hidden" />
+        <div class="row">
+          <div class="col">
+            <label>Helyszín neve
+              <input id="locationName" type="text" required />
+            </label>
+          </div>
+          <div class="col">
+            <label>
+              <input id="locationIsActive" type="checkbox" checked /> Aktív
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <button id="locationSaveBtn" type="submit">Helyszín mentése</button>
+          <button id="locationResetBtn" type="button">Űrlap törlése</button>
+        </div>
+      </form>
 
+      <div id="adminLocations"></div>
       <div id="adminEmployees"></div>
       <div class="status" id="adminStatus"></div>
     </div>

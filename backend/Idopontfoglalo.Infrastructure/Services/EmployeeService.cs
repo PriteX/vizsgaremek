@@ -20,7 +20,7 @@ public class EmployeeService : IEmployeeService
     {
         return await _db.Employees
             .OrderBy(e => e.Name)
-            .Select(e => new EmployeeDto(e.Id, e.Name, e.Email, e.Phone, e.IsActive))
+                      .Select(e => new EmployeeDto(e.Id, e.Name, e.Email, e.Phone, e.IsActive, e.LocationId, e.Location != null ? e.Location.Name : null))
             .ToListAsync();
     }
 
@@ -28,7 +28,7 @@ public class EmployeeService : IEmployeeService
     {
         return await _db.Employees
             .Where(e => e.Id == id)
-            .Select(e => new EmployeeDto(e.Id, e.Name, e.Email, e.Phone, e.IsActive))
+                       .Select(e => new EmployeeDto(e.Id, e.Name, e.Email, e.Phone, e.IsActive, e.LocationId, e.Location != null ? e.Location.Name : null))
             .FirstOrDefaultAsync();
     }
     public async Task<List<int>> GetServiceIdsAsync(int employeeId)
@@ -82,12 +82,14 @@ public class EmployeeService : IEmployeeService
 
     public async Task<EmployeeDto> CreateAsync(EmployeeUpsertModel model)
     {
+        await ValidateLocationAsync(model.LocationId);
         var entity = new Idopontfoglalo.Core.Entities.Employee
         {
             Name = model.Name.Trim(),
             Email = model.Email,
             Phone = model.Phone,
-            IsActive = model.IsActive
+            IsActive = model.IsActive,
+            LocationId = model.LocationId
         };
 
         _db.Employees.Add(entity);
@@ -107,11 +109,12 @@ public class EmployeeService : IEmployeeService
         await _db.SaveChangesAsync();
 
 
-        return new EmployeeDto(entity.Id, entity.Name, entity.Email, entity.Phone, entity.IsActive);
+        return new EmployeeDto(entity.Id, entity.Name, entity.Email, entity.Phone, entity.IsActive, entity.LocationId, null);
     }
 
     public async Task<EmployeeDto> UpdateAsync(int id, EmployeeUpsertModel model)
     {
+        await ValidateLocationAsync(model.LocationId);
         var entity = await _db.Employees.FirstOrDefaultAsync(e => e.Id == id);
         if (entity is null)
             throw new BusinessException("A dolgozó nem található.");
@@ -120,9 +123,21 @@ public class EmployeeService : IEmployeeService
         entity.Email = model.Email;
         entity.Phone = model.Phone;
         entity.IsActive = model.IsActive;
+        entity.LocationId = model.LocationId;
 
         await _db.SaveChangesAsync();
-        return new EmployeeDto(entity.Id, entity.Name, entity.Email, entity.Phone, entity.IsActive);
+        return new EmployeeDto(entity.Id, entity.Name, entity.Email, entity.Phone, entity.IsActive, entity.LocationId, null);
+    }
+
+
+    private async Task ValidateLocationAsync(int? locationId)
+    {
+        if (!locationId.HasValue)
+            return;
+
+        var exists = await _db.Locations.AnyAsync(l => l.Id == locationId.Value && l.IsActive);
+        if (!exists)
+            throw new BusinessException("A megadott helyszín nem létezik vagy inaktív.");
     }
 
     public async Task DeleteAsync(int id)

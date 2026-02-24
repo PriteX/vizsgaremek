@@ -30,7 +30,7 @@ public class EmployeesController : ControllerBase
         return item is null ? NotFound() : Ok(item);
     }
     [HttpGet("{id:int}/services")]
-    [Authorize(Roles = "ADMIN")]
+    [AllowAnonymous]
     public async Task<ActionResult<List<int>>> GetServices([FromRoute] int id)
         => Ok(await _employees.GetServiceIdsAsync(id));
 
@@ -47,7 +47,7 @@ public class EmployeesController : ControllerBase
     [Authorize(Roles = "ADMIN")]
     public async Task<ActionResult<EmployeeDto>> Create([FromBody] EmployeeUpsertRequest req)
     {
-        var created = await _employees.CreateAsync(new EmployeeUpsertModel(req.Name, req.Email, req.Phone, req.IsActive));
+        var created = await _employees.CreateAsync(new EmployeeUpsertModel(req.Name, req.Email, req.Phone, req.IsActive, req.LocationId));
         return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
     }
 
@@ -55,7 +55,7 @@ public class EmployeesController : ControllerBase
     [Authorize(Roles = "ADMIN")]
     public async Task<ActionResult<EmployeeDto>> Update([FromRoute] int id, [FromBody] EmployeeUpsertRequest req)
     {
-        var updated = await _employees.UpdateAsync(id, new EmployeeUpsertModel(req.Name, req.Email, req.Phone, req.IsActive));
+        var updated = await _employees.UpdateAsync(id, new EmployeeUpsertModel(req.Name, req.Email, req.Phone, req.IsActive, req.LocationId));
         return Ok(updated);
     }
 

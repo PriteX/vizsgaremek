@@ -27,21 +27,22 @@ builder.Services.AddCors(options =>
     });
 });
 
-// DB
+
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 
-// Services
+
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IServiceCatalogService, ServiceCatalogService>();
+builder.Services.AddScoped<ILocationService, LocationService>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IAvailabilityService, AvailabilityService>();
 builder.Services.AddScoped<IAppointmentService, AppointmentService>();
 
-// Auth (JWT)
+
 var jwtKey = builder.Configuration["Jwt:Key"] ?? "SUPER_DEMO_KEY_CHANGE_ME_32_CHARS_MINIMUM";
 var issuer = builder.Configuration["Jwt:Issuer"] ?? "idopontfoglalo";
 var audience = builder.Configuration["Jwt:Audience"] ?? "idopontfoglalo";
@@ -66,6 +67,8 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
+await EnsureLocationSchemaAsync(app);
+
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 if (app.Environment.IsDevelopment())
@@ -87,4 +90,43 @@ app.UseHttpsRedirection();
 app.MapControllers();
 
 app.Run();
+
+static async Task EnsureLocationSchemaAsync(WebApplication app)
+{
+    await using var scope = app.Services.CreateAsyncScope();
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    var logger = scope.ServiceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("SchemaInit");
+
+    var commands = new[]
+    {
+        """
+        CREATE TABLE IF NOT EXISTS locations (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            name VARCHAR(120) NOT NULL UNIQUE,
+            is_active TINYINT(1) NOT NULL DEFAULT 1
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+        """,
+        "ALTER TABLE employees ADD COLUMN IF NOT EXISTS location_id INT NULL;",
+        """
+        ALTER TABLE employees
+        ADD CONSTRAINT fk_employees_location
+        FOREIGN KEY (location_id) REFERENCES locations(id)
+        ON DELETE SET NULL;
+        """,
+        "INSERT IGNORE INTO locations (name, is_active) VALUES ('Fodrászat', 1), ('Kozmetika', 1);",
+        "UPDATE employees SET location_id = (SELECT id FROM locations WHERE name='Fodrászat' LIMIT 1) WHERE location_id IS NULL;"
+    };
+
+    foreach (var sql in commands)
+    {
+        try
+        {
+            await db.Database.ExecuteSqlRawAsync(sql);
+        }
+        catch (Exception ex)
+        {
+            logger.LogInformation(ex, "Schema init command skipped: {Sql}", sql);
+        }
+    }
+}
 

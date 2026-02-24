@@ -12,15 +12,20 @@ INSERT INTO users (email, password_hash, first_name, last_name, role_id) VALUES
   ('user@demo.local', '$2b$10$N8g/h1RpdgYDnzdVuhHTN.pPY2vaCQOd4JB5BhHu1O7BuYish8FKC', 'Demo', 'User', (SELECT id FROM roles WHERE name='USER'));
 
 
+INSERT INTO locations (name, is_active) VALUES
+  ('Fodrászat', 1),
+  ('Kozmetika', 1);
+
+
 INSERT INTO services (name, description, duration_minutes, price, is_active) VALUES
   ('Hajvágás', 'Alap hajvágás (férfi/női).', 30, 4500.00, 1),
   ('Festés', 'Hajfestés (időtartam szolgáltatás függő).', 60, 12000.00, 1),
   ('Szakáll igazítás', 'Szakáll formázás és igazítás.', 15, 2500.00, 1);
 
 
-INSERT INTO employees (name, email, phone, is_active) VALUES
-  ('Kiss Anna', 'anna@demo.local', '+36 30 111 1111', 1),
-  ('Nagy Péter', 'peter@demo.local', '+36 30 222 2222', 1);
+INSERT INTO employees (name, email, phone, is_active, location_id) VALUES
+  ('Kiss Anna', 'anna@demo.local', '+36 30 111 1111', 1, (SELECT id FROM locations WHERE name='Fodrászat')),
+  ('Nagy Péter', 'peter@demo.local', '+36 30 222 2222', 1, (SELECT id FROM locations WHERE name='Fodrászat'));
 
 
 INSERT INTO employee_services (employee_id, service_id) VALUES

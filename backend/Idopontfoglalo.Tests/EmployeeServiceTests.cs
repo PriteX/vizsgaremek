@@ -16,7 +16,8 @@ public class EmployeeServiceTests
             Name: "Teszt Dolgozó",
             Email: "teszt@demo.local",
             Phone: "+36 30 123 4567",
-            IsActive: true
+            IsActive: true,
+            LocationId: 1
         ));
 
         var availabilities = await db.Availability
