@@ -543,8 +543,10 @@ function openAdminModal() {
   modal.setAttribute("aria-hidden", "false");
    resetEmployeeForm();
   loadAdminEmployees();
-   loadAdminLocations();
+  loadAdminLocations();
+  loadAdminServices();
   resetLocationForm();
+  resetServiceForm()
 }
 
 
@@ -768,6 +770,7 @@ async function loadAdminLocations() {
       await loadLookups();
       await loadAdminLocations();
       await loadAdminEmployees();
+      await loadAdminServices();
     });
 
     actions.appendChild(editBtn);
@@ -806,6 +809,123 @@ async function onLocationSubmit(e) {
     resetLocationForm();
     await loadLookups();
     await loadAdminLocations();
+    await loadAdminEmployees();
+    await loadAdminServices();
+  } catch (err) {
+    setStatus("adminStatus", `Hiba: ${err.message}`);
+  }
+}
+
+
+function resetServiceForm() {
+  const serviceForm = el("serviceForm");
+  if (serviceForm) {
+    serviceForm.reset();
+  }
+
+  el("serviceId").value = "";
+  el("serviceIsActive").checked = true;
+}
+
+async function loadAdminServices() {
+  if (!isAdmin()) {
+    return;
+  }
+
+  const container = el("adminServices");
+  if (!container) {
+    return;
+  }
+
+  container.innerHTML = "";
+
+  const items = await apiFetch("/api/services");
+  if (!items.length) {
+    container.innerHTML = "<p class='muted'>Nincs szolgáltatás.</p>";
+    return;
+  }
+
+  for (const service of items) {
+    const row = document.createElement("div");
+    row.className = "app-item";
+    row.innerHTML = `<div><div>${service.name}</div><div class='muted'>Időtartam: ${service.durationMinutes} perc · Ár: ${Number(service.price || 0)} Ft · Állapot: ${service.isActive ? "Aktív" : "Inaktív"}</div></div>`;
+
+    const actions = document.createElement("div");
+    actions.className = "row";
+
+    const editBtn = document.createElement("button");
+    editBtn.type = "button";
+    editBtn.textContent = "Szerkesztés";
+    editBtn.addEventListener("click", () => {
+      el("serviceId").value = service.id;
+      el("serviceName").value = service.name || "";
+      el("serviceDescription").value = service.description || "";
+      el("serviceDuration").value = Number(service.durationMinutes || 0);
+      el("servicePrice").value = Number(service.price || 0);
+      el("serviceIsActive").checked = !!service.isActive;
+    });
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.type = "button";
+    deleteBtn.textContent = "Inaktiválás";
+    deleteBtn.addEventListener("click", async () => {
+      await apiFetch(`/api/services/${service.id}`, { method: "DELETE" });
+      await loadLookups();
+      await loadAdminServices();
+      await loadAdminEmployees();
+    });
+
+    actions.appendChild(editBtn);
+    actions.appendChild(deleteBtn);
+    row.appendChild(actions);
+    container.appendChild(row);
+  }
+}
+
+async function onServiceSubmit(e) {
+  e.preventDefault();
+
+  if (!isAdmin()) {
+    setStatus("adminStatus", "Nincs jogosultság.");
+    return;
+  }
+
+  const id = Number(el("serviceId").value || 0);
+  const name = el("serviceName").value.trim();
+  const description = el("serviceDescription").value.trim() || null;
+  const durationMinutes = Number(el("serviceDuration").value || 0);
+  const price = Number(el("servicePrice").value || 0);
+  const isActive = !!el("serviceIsActive").checked;
+
+  if (!name) {
+    setStatus("adminStatus", "A szolgáltatás neve kötelező.");
+    return;
+  }
+
+  if (!Number.isFinite(durationMinutes) || durationMinutes <= 0) {
+    setStatus("adminStatus", "Az időtartam legyen pozitív szám.");
+    return;
+  }
+
+  if (!Number.isFinite(price) || price < 0) {
+    setStatus("adminStatus", "Az ár nem lehet negatív.");
+    return;
+  }
+
+  const payload = { name, description, durationMinutes, price, isActive };
+
+  try {
+    if (id > 0) {
+      await apiFetch(`/api/services/${id}`, { method: "PUT", body: JSON.stringify(payload) });
+      setStatus("adminStatus", "Szolgáltatás frissítve.");
+    } else {
+      await apiFetch("/api/services", { method: "POST", body: JSON.stringify(payload) });
+      setStatus("adminStatus", "Szolgáltatás létrehozva.");
+    }
+
+    resetServiceForm();
+    await loadLookups();
+    await loadAdminServices();
     await loadAdminEmployees();
   } catch (err) {
     setStatus("adminStatus", `Hiba: ${err.message}`);
@@ -918,7 +1038,15 @@ const categorySelect = el("categorySelect");
   if (locationResetBtn) {
     locationResetBtn.addEventListener("click", resetLocationForm);
   }
+const serviceForm = el("serviceForm");
+  if (serviceForm) {
+    serviceForm.addEventListener("submit", onServiceSubmit);
+  }
 
+  const serviceResetBtn = el("serviceResetBtn");
+  if (serviceResetBtn) {
+    serviceResetBtn.addEventListener("click", resetServiceForm);
+  }
   const serviceSelect = el("serviceSelect");
   if (serviceSelect) {
     serviceSelect.addEventListener("change", filterEmployeesBySelectedService);
