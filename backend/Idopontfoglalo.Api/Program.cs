@@ -1,11 +1,13 @@
 using System.Text;
+using Idopontfoglalo.Api.Middleware;
 using Idopontfoglalo.Core.Interfaces;
 using Idopontfoglalo.Infrastructure.Data;
 using Idopontfoglalo.Infrastructure.Services;
-using Idopontfoglalo.Api.Middleware;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using MySqlConnector;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -97,8 +99,8 @@ static async Task EnsureLocationSchemaAsync(WebApplication app)
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     var logger = scope.ServiceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("SchemaInit");
 
-    var commands = new[]
-    {
+    var bootstrapCommands = new[]
+      {
         """
         CREATE TABLE IF NOT EXISTS locations (
             id INT AUTO_INCREMENT PRIMARY KEY,
@@ -106,18 +108,10 @@ static async Task EnsureLocationSchemaAsync(WebApplication app)
             is_active TINYINT(1) NOT NULL DEFAULT 1
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
         """,
-        "ALTER TABLE employees ADD COLUMN IF NOT EXISTS location_id INT NULL;",
-        """
-        ALTER TABLE employees
-        ADD CONSTRAINT fk_employees_location
-        FOREIGN KEY (location_id) REFERENCES locations(id)
-        ON DELETE SET NULL;
-        """,
-        "INSERT IGNORE INTO locations (name, is_active) VALUES ('Fodrászat', 1), ('Kozmetika', 1);",
-        "UPDATE employees SET location_id = (SELECT id FROM locations WHERE name='Fodrászat' LIMIT 1) WHERE location_id IS NULL;"
+    "INSERT IGNORE INTO locations (name, is_active) VALUES ('Fodrászat', 1), ('Kozmetika', 1);"
     };
 
-    foreach (var sql in commands)
+    foreach (var sql in bootstrapCommands)
     {
         try
         {
@@ -128,5 +122,60 @@ static async Task EnsureLocationSchemaAsync(WebApplication app)
             logger.LogInformation(ex, "Schema init command skipped: {Sql}", sql);
         }
     }
+    try
+    {
+        var connection = (MySqlConnection)db.Database.GetDbConnection();
+        if (connection.State != System.Data.ConnectionState.Open)
+            await connection.OpenAsync();
+
+        var schema = connection.Database;
+
+        if (!await ColumnExistsAsync(connection, schema, "employees", "location_id"))
+            await db.Database.ExecuteSqlRawAsync("ALTER TABLE employees ADD COLUMN location_id INT NULL;");
+
+        if (!await ForeignKeyExistsAsync(connection, schema, "employees", "fk_employees_location"))
+        {
+            await db.Database.ExecuteSqlRawAsync(
+                "ALTER TABLE employees ADD CONSTRAINT fk_employees_location FOREIGN KEY (location_id) REFERENCES locations(id) ON DELETE SET NULL;");
+        }
+
+        await db.Database.ExecuteSqlRawAsync(
+            "UPDATE employees SET location_id = (SELECT id FROM locations WHERE name='Fodrászat' LIMIT 1) WHERE location_id IS NULL;");
+    }
+    catch (Exception ex)
+    {
+        logger.LogInformation(ex, "Schema verification skipped.");
+    }
+
+}
+static async Task<bool> ColumnExistsAsync(MySqlConnection connection, string schema, string table, string column)
+{
+    await using var command = connection.CreateCommand();
+    command.CommandText = @"SELECT COUNT(*)
+FROM information_schema.COLUMNS
+WHERE TABLE_SCHEMA = @schema AND TABLE_NAME = @table AND COLUMN_NAME = @column;";
+    command.Parameters.AddWithValue("@schema", schema);
+    command.Parameters.AddWithValue("@table", table);
+    command.Parameters.AddWithValue("@column", column);
+
+    var count = Convert.ToInt32(await command.ExecuteScalarAsync());
+    return count > 0;
+}
+
+static async Task<bool> ForeignKeyExistsAsync(MySqlConnection connection, string schema, string table, string constraintName)
+{
+    await using var command = connection.CreateCommand();
+    command.CommandText = @"SELECT COUNT(*)
+FROM information_schema.TABLE_CONSTRAINTS
+WHERE CONSTRAINT_SCHEMA = @schema
+  AND TABLE_NAME = @table
+  AND CONSTRAINT_NAME = @constraintName
+  AND CONSTRAINT_TYPE = 'FOREIGN KEY';";
+    command.Parameters.AddWithValue("@schema", schema);
+    command.Parameters.AddWithValue("@table", table);
+    command.Parameters.AddWithValue("@constraintName", constraintName);
+
+    var count = Convert.ToInt32(await command.ExecuteScalarAsync());
+    return count > 0;
 }
 

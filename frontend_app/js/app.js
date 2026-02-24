@@ -260,8 +260,7 @@ function filterEmployeesBySelectedService() {
   }
 
   const selectedServiceId = Number(serviceSelect.value || 0);
-    const servicesInCategory = getServicesBySelectedCategory();
-  const categoryServiceIds = new Set(servicesInCategory.map((s) => s.id));
+
   const employees = getEmployeesBySelectedLocation();
 
   const eligible = employees.filter((employee) => {

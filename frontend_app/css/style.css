@@ -168,3 +168,27 @@ hr{
   gap:10px;
   flex-wrap:wrap;
 }
+.admin-lists-grid{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+@media (min-width: 900px){
+  .admin-lists-grid{
+    grid-template-columns: 1fr 1fr;
+    align-items:start;
+  }
+}
+
+.admin-list-panel{
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  background: rgba(255,255,255,.02);
+}
+
+.admin-list-panel h4{
+  margin: 0 0 8px;
+}

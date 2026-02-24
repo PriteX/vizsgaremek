@@ -174,8 +174,7 @@
               "RelativeToolTip": "Idopontfoglalo.Infrastructure\\Services\\EmployeeService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAIsAAABZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-16T09:57:17.723Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-16T09:57:17.723Z"
             },
             {
               "$type": "Document",
@@ -187,8 +186,7 @@
               "RelativeToolTip": "Idopontfoglalo.Tests\\AppointmentServiceTests.cs",
               "ViewState": "AgIAAB8AAAAAAAAAAAAQwB8AAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-10T12:46:06.727Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-10T12:46:06.727Z"
             },
             {
               "$type": "Document",
@@ -200,8 +198,7 @@
               "RelativeToolTip": "Idopontfoglalo.Tests\\EmployeeServiceTests.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-19T09:34:01.238Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-19T09:34:01.238Z"
             },
             {
               "$type": "Document",
@@ -213,8 +210,7 @@
               "RelativeToolTip": "Idopontfoglalo.Tests\\TestDbFactory.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAAwCEAAABnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-10T12:46:47.684Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-10T12:46:47.684Z"
             },
             {
               "$type": "Document",
@@ -226,8 +222,7 @@
               "RelativeToolTip": "Idopontfoglalo.Infrastructure\\Idopontfoglalo.Infrastructure.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-02-10T08:37:09.562Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-10T08:37:09.562Z"
             },
             {
               "$type": "Document",
@@ -237,10 +232,14 @@
               "RelativeDocumentMoniker": "Idopontfoglalo.Api\\Program.cs",
               "ToolTip": "C:\\Users\\peter\\Documents\\ISKOLA\\vizsgaremek\\vizsgaremek_idopontfoglalo\\backend\\Idopontfoglalo.Api\\Program.cs",
               "RelativeToolTip": "Idopontfoglalo.Api\\Program.cs",
-              "ViewState": "AgIAAEUAAAAAAAAAAAAiwIIAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAI0AAAAAAAAAAAAmwLMAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-09T12:49:55.487Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
             },
             {
               "$type": "Document",
@@ -252,12 +251,7 @@
               "RelativeToolTip": "Idopontfoglalo.Infrastructure\\Data\\AppDbContext.cs",
               "ViewState": "AgIAAAsAAAAAAAAAAAA9wCUAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-11T09:42:49.05Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+              "WhenOpened": "2026-02-11T09:42:49.05Z"
             },
             {
               "$type": "Document",
@@ -269,8 +263,7 @@
               "RelativeToolTip": "Idopontfoglalo.Core\\Models\\EmployeeModels.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAABtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-24T08:38:44.584Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-24T08:38:44.584Z"
             },
             {
               "$type": "Document",
@@ -282,8 +275,7 @@
               "RelativeToolTip": "Idopontfoglalo.Core\\Entities\\Employee.cs",
               "ViewState": "AgIAAAoAAAAAAAAAAIAxwBUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-11T08:56:20.731Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-11T08:56:20.731Z"
             },
             {
               "$type": "Document",
@@ -295,8 +287,7 @@
               "RelativeToolTip": "Idopontfoglalo.Api\\Controllers\\EmployeesController.cs",
               "ViewState": "AgIAACIAAAAAAAAAAIAwwDkAAACOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-16T09:54:47.692Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-16T09:54:47.692Z"
             },
             {
               "$type": "Document",
@@ -308,8 +299,7 @@
               "RelativeToolTip": "Idopontfoglalo.Api\\Contracts\\EmployeeContracts.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-16T09:55:31.796Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-16T09:55:31.796Z"
             },
             {
               "$type": "Document",
@@ -321,8 +311,7 @@
               "RelativeToolTip": "Idopontfoglalo.Infrastructure\\Services\\LocationService.cs",
               "ViewState": "AgIAAAsAAAAAAAAAAAAAwAoAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-24T08:44:08.482Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-24T08:44:08.482Z"
             },
             {
               "$type": "Document",
@@ -334,8 +323,7 @@
               "RelativeToolTip": "Idopontfoglalo.Core\\Models\\LocationModels.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-24T08:39:17.455Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-24T08:39:17.455Z"
             },
             {
               "$type": "Document",
@@ -347,8 +335,7 @@
               "RelativeToolTip": "Idopontfoglalo.Core\\Interfaces\\ILocationService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-24T08:38:22.298Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-24T08:38:22.298Z"
             },
             {
               "$type": "Document",
@@ -360,8 +347,7 @@
               "RelativeToolTip": "Idopontfoglalo.Core\\Entities\\Location.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-24T08:37:45.879Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-24T08:37:45.879Z"
             },
             {
               "$type": "Document",
@@ -373,8 +359,7 @@
               "RelativeToolTip": "Idopontfoglalo.Api\\Controllers\\LocationsController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-24T08:36:13.516Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-24T08:36:13.516Z"
             },
             {
               "$type": "Document",
@@ -386,8 +371,7 @@
               "RelativeToolTip": "Idopontfoglalo.Api\\Contracts\\LocationContracts.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-24T08:32:53.093Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-24T08:32:53.093Z"
             },
             {
               "$type": "Document",
@@ -603,8 +587,7 @@
               "RelativeToolTip": "Idopontfoglalo.Core\\Idopontfoglalo.Core.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-02-10T08:37:12.423Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-10T08:37:12.423Z"
             },
             {
               "$type": "Document",
