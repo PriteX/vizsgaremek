@@ -344,6 +344,36 @@ async function loadLookups() {
   }
 }
 
+function showLoginView() {
+  const loginView = el("loginView");
+  const registerWrap = el("registerWrap");
+
+  if (loginView) {
+    loginView.classList.remove("hidden");
+  }
+
+  if (registerWrap) {
+    registerWrap.classList.add("hidden");
+  }
+
+  setStatus("authStatus", "");
+}
+
+function showRegisterView() {
+  const loginView = el("loginView");
+  const registerWrap = el("registerWrap");
+
+  if (loginView) {
+    loginView.classList.add("hidden");
+  }
+
+  if (registerWrap) {
+    registerWrap.classList.remove("hidden");
+  }
+
+  setStatus("authStatus", "");
+}
+
 async function onLogin(e) {
   e.preventDefault();
   setStatus("authStatus", "");
@@ -369,6 +399,7 @@ async function onLogin(e) {
     setAuthenticatedView(res.email);
     updateAdminButtonVisibility();
     await loadMyAppointments();
+    showLoginView();
   } catch (err) {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
@@ -402,6 +433,7 @@ async function onRegister(e) {
     setAuthenticatedView(res.email);
     updateAdminButtonVisibility();
     await loadMyAppointments();
+    showLoginView();
   } catch (err) {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
@@ -992,6 +1024,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   el("loginForm").addEventListener("submit", onLogin);
   el("registerForm").addEventListener("submit", onRegister);
 el("headerLogoutBtn").addEventListener("click", logout);
+
+  const showRegisterBtn = el("showRegisterBtn");
+  if (showRegisterBtn) {
+    showRegisterBtn.addEventListener("click", showRegisterView);
+  }
+
+  const showLoginBtn = el("showLoginBtn");
+  if (showLoginBtn) {
+    showLoginBtn.addEventListener("click", showLoginView);
+  }
   el("loadSlotsBtn").addEventListener("click", loadSlots);
   el("loadMyAppointmentsBtn").addEventListener("click", loadMyAppointments);
 
@@ -1065,6 +1107,7 @@ const serviceForm = el("serviceForm");
        setAuthenticatedView();
     setStatus("authStatus", "Nem vagy bejelentkezve.");
     el("myAppointments").innerHTML = "<p class='muted'>A foglalásokhoz jelentkezz be.</p>";
+   showLoginView();
   }
 
   try {

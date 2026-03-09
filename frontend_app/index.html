@@ -22,23 +22,26 @@
 
   <main class="container grid">
     <section class="card" id="authCard">
-      <h2>Bejelentkezés</h2>
-      <form id="loginForm">
-        <label>E-mail
-          <input type="email" id="loginEmail" required placeholder="user@demo.local" />
-        </label>
-        <label>Jelszó
-          <input type="password" id="loginPassword" required placeholder="User123!" />
-        </label>
-        <button type="submit">Belépés</button>
-       
-   
-      </form>
+      <div id="loginView">
+        <h2>Bejelentkezés</h2>
+        <form id="loginForm">
+          <label>E-mail
+            <input type="email" id="loginEmail" required placeholder="user@demo.local" />
+          </label>
+          <label>Jelszó
+            <input type="password" id="loginPassword" required placeholder="User123!" />
+          </label>
+          <button type="submit">Belépés</button>
+        </form>
 
-     <div id="registerWrap" class="hidden">
-        <hr />
+     <div class="auth-switch-row">
+          <button id="showRegisterBtn" type="button" class="auth-switch-btn">Regisztráció</button>
+        </div>
+      </div>
 
-     <h2>Regisztráció</h2>
+
+      <div id="registerWrap" class="hidden">
+        <h2>Regisztráció</h2>
         <form id="registerForm">
           <label>E-mail
             <input type="email" id="regEmail" required />
@@ -54,6 +57,9 @@
           </label>
           <button type="submit">Regisztráció</button>
         </form>
+        <div class="auth-switch-row">
+          <button id="showLoginBtn" type="button" class="auth-switch-btn">← Bejelentkezés</button>
+        </div>
       </div>
 
       <div class="status" id="authStatus"></div>
